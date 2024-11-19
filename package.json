@@ -1,0 +1,27 @@
+{
+  "name": "cctv_weather_forecasting_m3u",
+  "version": "1.0.0",
+  "description": "cctv 中央电视台 新闻联播 天气预报 m3u生成",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewGoal/cctv_weather_forecasting_m3u.git"
+  },
+  "keywords": [
+    "cctv",
+    "weather",
+    "forecasting"
+  ],
+  "author": "https://github.com/AndrewGoal",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/issues"
+  },
+  "homepage": "https://github.com/AndrewGoal/cctv_weather_forecasting_m3u#readme",
+  "dependencies": {
+    "puppeteer": "^23.8.0"
+  }
+}
