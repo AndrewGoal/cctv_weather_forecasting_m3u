@@ -3,7 +3,10 @@ const puppeteer = require('puppeteer');
 
 (async () => {
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+  
   const page = await browser.newPage();
   const baseUrl='https://www.weathertv.cn';
   await page.goto(`${baseUrl}/cms/yb_video.shtml`, { waitUntil: 'networkidle2' });
