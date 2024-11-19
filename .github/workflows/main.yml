@@ -1,4 +1,4 @@
-name: Run Node.js script
+name: 生成cctv 中央电视台 新闻联播 天气预报 m3u8文件
 
 on:
   schedule:
