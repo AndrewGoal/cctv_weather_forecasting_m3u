@@ -1,0 +1,20 @@
+name: Run Node.js script
+
+on:
+  schedule:
+    - cron: 0 0 * * * # runs every day at midnight
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Node.js script
+        run: |
+          node app.js > cctv_weather_forecasting.m3u8
+      - name: Upload output file
+        uses: actions/upload-artifact@v2
+        with:
+          name: cctv_weather_forecasting.m3u8
+          path: cctv_weather_forecasting.m3u8
