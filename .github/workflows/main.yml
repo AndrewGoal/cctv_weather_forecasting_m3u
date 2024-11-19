@@ -1,8 +1,10 @@
-name: 生成cctv 中央电视台 新闻联播 天气预报 m3u8文件
+name: 生成新闻联播天气预报m3u8文件
 
 on:
   schedule:
-      - cron: "*/2 * * * *" # runs every 2 minutes
+      - cron: "17 20 * * *" # runs at 20:17 every day
+      - cron: "20 20 * * *" # runs at 20:20 every day
+      # - cron: "*/2 * * * *" # runs every 2 minutes
 
 jobs:
   run-script:
