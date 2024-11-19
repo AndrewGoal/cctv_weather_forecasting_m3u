@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
       - name: Run Node.js script
         run: |
           node app.js > cctv_weather_forecasting.m3u8
@@ -18,3 +20,4 @@ jobs:
         with:
           name: cctv_weather_forecasting.m3u8
           path: cctv_weather_forecasting.m3u8
+
