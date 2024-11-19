@@ -2,7 +2,7 @@ name: Run Node.js script
 
 on:
   schedule:
-      - cron: "*/3 * * * *" # runs every 3 minutes
+      - cron: "*/1 * * * *" # runs every 1 minutes
 
 jobs:
   run-script:
