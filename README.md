@@ -18,6 +18,9 @@ curl 'https://e.weather.com.cn/pubm/video_lianbo_2021.htm'
 
 ## 生成和使用天气预报m3u文件
 
+### 样例：
+[tq.m3u](tq.m3u)
+
 ### 本地运行：
 ```
 node app.js
