@@ -3,6 +3,8 @@ const puppeteer = require('puppeteer');
 
 (async () => {
 
+  let latestUrl
+
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
@@ -14,6 +16,7 @@ const puppeteer = require('puppeteer');
   const links = await page.$$('#ylist > li > div > p > a');
 //   console.log(links);
   for (let i = 0; i < links.length; i++) {
+    // for (let i = 0; i < 1; i++) {
     const link = links[i];
     const href = await page.evaluate(el => el.getAttribute('href'), link);
     const text = await page.evaluate(el => el.innerText, link);
@@ -23,6 +26,7 @@ const puppeteer = require('puppeteer');
     await page1.goto(urlOf1Date, { waitUntil: 'networkidle2' });
     const videoElement = await page1.$('video source');
     const videoUrl = await page1.evaluate(el => el.getAttribute('src'), videoElement);
+    if (i==0) latestUrl = videoUrl;
     await page1.close();
 
     // console.log({ href, videoUrl });
