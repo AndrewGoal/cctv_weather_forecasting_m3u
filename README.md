@@ -22,8 +22,13 @@ curl 'https://e.weather.com.cn/pubm/video_lianbo_2021.htm'
 [tq.m3u](tq.m3u)
 
 ### 本地运行：
-```
-node app.js
+```bash
+npm install
+node app.js > tq.m3u
+
+#或者：
+
+docker run -i --init --cap-add=SYS_ADMIN --rm ghcr.io/puppeteer/puppeteer:latest node -e "$(cat app.js)" > tq.m3u
 ```
 
 ### 也可以直接获取最新的m3u8文件：
