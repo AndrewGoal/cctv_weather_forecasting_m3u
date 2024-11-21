@@ -28,4 +28,5 @@ node app.js > tq.m3u
 - IINA播放器：⇧ + ⌘ + o 以上m3u网址
 - [TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)
 
-![TV Image](tv.jpeg)
+![设置](tvset.jpeg)
+![效果](tv.jpeg)
