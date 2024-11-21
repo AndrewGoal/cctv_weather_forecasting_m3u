@@ -4,7 +4,8 @@ on:
   schedule:
       # - cron: "17 20 * * *" # runs at 20:17 every day
       # - cron: "20 20 * * *" # runs at 20:20 every day
-      - cron: "*/2 * * * *" # runs every 30 minutes
+      - cron: "*/30 * * * *" # runs every 30 minutes
+  workflow_dispatch: # 添加手动触发选项
 
 jobs:
   run-script:
