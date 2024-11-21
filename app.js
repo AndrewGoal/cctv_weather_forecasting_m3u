@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 
 (async () => {
 
-  let latestUrl
+  let latestUrl,latestDate;
 
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -33,23 +33,34 @@ const puppeteer = require('puppeteer');
     await page1.goto(urlOf1Date, { waitUntil: 'networkidle2' });
     const videoElement = await page1.$('video source');
     const videoUrl = await page1.evaluate(el => el?.getAttribute('src'), videoElement);
-    if (i==0) latestUrl = videoUrl;
     // await page1.close();
 
     // console.log({ href, videoUrl });
     const date1 = text.replace('新闻联播天气预报', '').replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
-    const date = text.replace('新闻联播天气预报', '').replace(/(\d{4})(\d{2})(\d{2})/, '$1年$2月$3日');
+    const date = text.replace('新闻联播天气预报', '').replace(/(\d{4})(\d{2})(\d{2})/, '$2月$3日');
+    if (i==0) {
+      latestUrl = videoUrl;
+      latestDate = date;
+    }
     // // console.log({date, videoUrl});
 
     // console.log({date, urlOf1Date,videoUrl});
 
     if (videoUrl) {
       console.log(
-`#EXTINF:-1 tvg-name="CCTV_WF_${date1}" tvg-logo="https://live.fanmingming.com/tv/CCTV1.png" group-title="19:30预报",${date}
+`#EXTINF:-1 tvg-name="lb_${date1}" group-title="19:30预报",${date}
 ${videoUrl}`
       );      
     }
   }
+
+  if (latestUrl) {
+    console.log(
+`#EXTINF:-1 tvg-name="latest-lb" group-title="最新预报",${latestDate}19:30
+${latestUrl}`
+    );
+  }
+
   await browser.close();
 })();
 
