@@ -53,13 +53,13 @@
         // console.log(data);
         
         let tvg_name = `${group_name}${data.data[0].pubDate.slice(-8,-3)}`;
-        console.log(
-            `#EXTINF:-1 tvg-name="${tvg_name}" group-title="最新天气",${tvg_name}\n${data.data[0].url}`
-        );
+        // console.log(`#EXTINF:-1 tvg-name="${tvg_name}" group-title="最新天气",${tvg_name}\n${data.data[0].url}`);
+        console.log(`#EXTINF:-1 group-title="最新天气",${tvg_name}\n${data.data[0].url}`);
         
         const playlist = data.data.map((item,index) => {
             let _tvg_name = item.pubDate.slice(-14,-3).replace('-','月').replace(' ','日');
-            return `#EXTINF:-1 tvg-name="${group_name}${_tvg_name}" group-title="${group_name}",${_tvg_name}\n${item.url}`
+            // return `#EXTINF:-1 tvg-name="${group_name}${_tvg_name}" group-title="${group_name}",${_tvg_name}\n${item.url}`
+            return `#EXTINF:-1 group-title="${group_name}",${_tvg_name}\n${item.url}`
         }).join('\n');
             
         console.log(playlist);
