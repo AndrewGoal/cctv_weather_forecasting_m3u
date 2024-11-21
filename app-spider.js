@@ -1,5 +1,15 @@
-// spider方式抓取，废弃
+// spider方式爬取，废弃
+
+// 使用方法：
+// npm install
+// node app-spider.js > tq.m3u
+
+// 或者：
+// docker run -i --init --cap-add=SYS_ADMIN --rm ghcr.io/puppeteer/puppeteer:latest node -e "$(cat app-spider.js)" > tq.m3u
+
+// 数据源：
 // https://www.weathertv.cn/cms/yb_video.shtml
+
 const puppeteer = require('puppeteer');
 
 (async () => {
@@ -49,7 +59,7 @@ const puppeteer = require('puppeteer');
 
     if (videoUrl) {
       console.log(
-`#EXTINF:-1 tvg-name="lb_${date1}" group-title="19:30预报",${date}
+`#EXTINF:-1 group-title="19:30预报",${date}
 ${videoUrl}`
       );      
     }
@@ -57,7 +67,7 @@ ${videoUrl}`
 
   if (latestUrl) {
     console.log(
-`#EXTINF:-1 tvg-name="latest-lb" group-title="最新预报",${latestDate}19:30
+`#EXTINF:-1 group-title="最新天气",${latestDate}19:30
 ${latestUrl}`
     );
   }
