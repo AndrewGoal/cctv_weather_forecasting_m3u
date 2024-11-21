@@ -2,8 +2,6 @@ name: 生成天气预报m3u文件
 
 on:
   schedule:
-      # - cron: "17 20 * * *" # runs at 20:17 every day
-      # - cron: "20 20 * * *" # runs at 20:20 every day
       - cron: "*/30 * * * *" # runs every 30 minutes
   workflow_dispatch: # 添加手动触发选项
 
@@ -30,7 +28,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data } = await github.repos.getLatestRelease({
+            const { context, github } = require('@actions/github');
+            const { data } = await github.rest.repos.getLatestRelease({
               owner: context.repo.owner,
               repo: context.repo.repo
             });
@@ -46,4 +45,3 @@ jobs:
             -H "Content-Type: application/octet-stream" \
             --data-binary @cctv_weather_forecasting.m3u \
             "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ env.RELEASE_ID }}/assets?name=cctv_weather_forecasting.m3u"
-    
