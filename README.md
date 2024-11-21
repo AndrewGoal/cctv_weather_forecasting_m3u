@@ -26,7 +26,7 @@ node app.js > tq.m3u
 ### 食用m3u文件：
 - VLC播放器：⌘ + n 以上m3u网址
 - IINA播放器：⇧ + ⌘ + o 以上m3u网址
-- [TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)
+- [TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)，可以此配置为专用的天气预报电视app，效果如同：
 
 ![设置](tvset.jpeg)
 ![效果](tv.jpeg)
