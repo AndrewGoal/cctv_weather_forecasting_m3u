@@ -1,5 +1,5 @@
 # cctv_weather_forecasting_m3u
-cctv 中央电视台 天气预报 m3u文件生成
+cctv 中央电视台 天气预报 气象分析 m3u文件生成
 
 ## 数据源
 - https://www.weather.com.cn/video/ylist.shtml
