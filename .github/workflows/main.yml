@@ -4,7 +4,7 @@ on:
   schedule:
       # - cron: "17 20 * * *" # runs at 20:17 every day
       # - cron: "20 20 * * *" # runs at 20:20 every day
-      - cron: "*/1 * * * *" # runs every 30 minutes
+      - cron: "*/2 * * * *" # runs every 30 minutes
 
 jobs:
   run-script:
@@ -22,12 +22,27 @@ jobs:
       #   with:
       #     name: cctv_weather_forecasting.m3u
       #     path: cctv_weather_forecasting.m3u
+
+      - name: Get latest release ID
+        id: get_latest_release
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data } = await github.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            core.setOutput('release_id', data.id);
+      
       - name: Upload output file to GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ steps.get_latest_release.outputs.release_id }}
         run: |
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Content-Type: application/octet-stream" \
             --data-binary @cctv_weather_forecasting.m3u \
-            "https://uploads.github.com/repos/${{ github.repository }}/releases/latest/assets?name=cctv_weather_forecasting.m3u"
+            "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ env.RELEASE_ID }}/assets?name=cctv_weather_forecasting.m3u"
+    
