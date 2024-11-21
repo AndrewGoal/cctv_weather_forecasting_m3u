@@ -1,5 +1,5 @@
 # cctv_weather_forecasting_m3u
-cctv 中央电视台 新闻联播 天气预报 m3u生成
+cctv 中央电视台 天气预报 m3u文件生成
 
 ## 数据源
 
@@ -34,6 +34,10 @@ docker run -i --init --cap-add=SYS_ADMIN --rm ghcr.io/puppeteer/puppeteer:latest
 ### 也可以直接获取最新的m3u8文件：
 
 [![生成天气预报m3u8文件](https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/workflows/main.yml/badge.svg)](https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/workflows/main.yml)
+
+https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/runs/11941264291/artifacts/2215342389
+
+https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/runs/11941274767/artifacts/2215345549
 
 ### 食用m3u文件：
 - VLC播放器
