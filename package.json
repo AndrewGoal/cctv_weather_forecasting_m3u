@@ -1,10 +1,10 @@
 {
   "name": "cctv_weather_forecasting_m3u",
   "version": "1.0.0",
-  "description": "cctv 中央电视台 新闻联播 天气预报 m3u生成",
+  "description": "cctv 中央电视台 天气预报 m3u文件生成",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node app.js"
   },
   "repository": {
     "type": "git",
