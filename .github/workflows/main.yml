@@ -1,10 +1,10 @@
-name: 生成新闻联播天气预报m3u8文件
+name: 生成天气预报m3u文件
 
 on:
   schedule:
-      - cron: "17 20 * * *" # runs at 20:17 every day
-      - cron: "20 20 * * *" # runs at 20:20 every day
-      # - cron: "*/2 * * * *" # runs every 2 minutes
+      # - cron: "17 20 * * *" # runs at 20:17 every day
+      # - cron: "20 20 * * *" # runs at 20:20 every day
+      - cron: "*/30 * * * *" # runs every 30 minutes
 
 jobs:
   run-script:
@@ -12,14 +12,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install dependencies
-        run: npm install
+      # - name: Install dependencies
+      #   run: npm install
       - name: Run Node.js script
         run: |
-          node app.js > cctv_weather_forecasting.m3u8
+          node app.js > cctv_weather_forecasting.m3u
       - name: Upload output file
         uses: actions/upload-artifact@v4
         with:
-          name: cctv_weather_forecasting.m3u8
-          path: cctv_weather_forecasting.m3u8
+          name: cctv_weather_forecasting.m3u
+          path: cctv_weather_forecasting.m3u
 
