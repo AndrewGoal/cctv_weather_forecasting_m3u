@@ -33,7 +33,23 @@ jobs:
               repo: context.repo.repo
             });
             core.setOutput('release_id', data.id);
-      
+      - name: Check if asset exists
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ steps.get_latest_release.outputs.release_id }}
+        run: |
+          ASSET_ID=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github+json" \
+          https://api.github.com/repos/${{ github.repository }}/releases/${{ env.RELEASE_ID }}/assets \
+          | jq -r '.[] | select(.name=="cctv_weather_forecasting.m3u") | .id')
+          echo "ASSET_ID=$ASSET_ID" >> $GITHUB_ENV
+          if [ -n "$ASSET_ID" ]; then
+            curl -X DELETE \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/${{ github.repository }}/releases/assets/$ASSET_ID
+          fi
+                
       - name: Upload output file to GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
