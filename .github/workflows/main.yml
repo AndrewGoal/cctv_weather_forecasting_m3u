@@ -4,7 +4,7 @@ on:
   schedule:
       # - cron: "17 20 * * *" # runs at 20:17 every day
       # - cron: "20 20 * * *" # runs at 20:20 every day
-      - cron: "*/30 * * * *" # runs every 30 minutes
+      - cron: "*/1 * * * *" # runs every 30 minutes
 
 jobs:
   run-script:
@@ -17,9 +17,17 @@ jobs:
       - name: Run Node.js script
         run: |
           node app.js > cctv_weather_forecasting.m3u
-      - name: Upload output file
-        uses: actions/upload-artifact@v4
-        with:
-          name: cctv_weather_forecasting.m3u
-          path: cctv_weather_forecasting.m3u
-
+      # - name: Upload output file
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: cctv_weather_forecasting.m3u
+      #     path: cctv_weather_forecasting.m3u
+      - name: Upload output file to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Content-Type: application/octet-stream" \
+            --data-binary @cctv_weather_forecasting.m3u \
+            "https://uploads.github.com/repos/${{ github.repository }}/releases/latest/assets?name=cctv_weather_forecasting.m3u"
