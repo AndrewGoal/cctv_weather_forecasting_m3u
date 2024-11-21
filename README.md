@@ -14,17 +14,18 @@ cctv 中央电视台 天气预报 气象分析 m3u文件生成
 node app.js > tq.m3u
 ```
 
-### 也可以直接获取最新的m3u文件：
+### 在线获取最新的m3u文件：
 
 [![生成天气m3u文件](https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/workflows/main.yml/badge.svg)](https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/workflows/main.yml)
 
-https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/runs/11941264291/artifacts/2215342389
+每半小时更新一次，最新版下载网址：
 
-https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/actions/runs/11941274767/artifacts/2215345549
+- https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/releases/latest/download/cctv_weather_forecasting.m3u
+- 墙内：https://github.moeyy.xyz/https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/releases/latest/download/cctv_weather_forecasting.m3u
 
 ### 食用m3u文件：
-- VLC播放器
-- IINA播放器
+- VLC播放器：⌘ + n 以上m3u网址
+- IINA播放器：⇧ + ⌘ + o 以上m3u网址
 - [TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)
 
 ![TV Image](tv.jpeg)
