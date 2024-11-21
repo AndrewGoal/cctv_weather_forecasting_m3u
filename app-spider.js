@@ -1,3 +1,4 @@
+// spider方式抓取，废弃
 // https://www.weathertv.cn/cms/yb_video.shtml
 const puppeteer = require('puppeteer');
 
