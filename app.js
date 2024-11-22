@@ -119,7 +119,7 @@
 
         if (card.card_type !== 9) return;
         if (index == 0){
-            latests.push({text:`#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(8,16).replace('T','日')}\n${url}`,pubDate:datewbISOString});
+            latests.push({text:`#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(8,16).replace('T','日')}\n${url}`,pubDate:card.mblog.created_at});
         }
         m3utext += `\n#EXTINF:${duration} group-title="农业气象",${datewbISOString.slice(5, 16).replace('-','月').replace('T','日')}\n${url}`
 
@@ -127,7 +127,7 @@
     m3utext = `#EXTM3U\n${latests.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate)).map(item=>item.text).join('\n')}${m3utext}`
 
     console.log(m3utext);
-    
+
     
 })();
 
