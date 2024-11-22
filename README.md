@@ -2,7 +2,8 @@
 cctv 中央电视台 天气预报 气象分析 m3u文件生成
 
 ## 数据源
-- https://www.weather.com.cn/video/ylist.shtml
+1. https://www.weather.com.cn/video/ylist.shtml
+2. https://m.weibo.cn/u/1969156553
 
 ## 生成和使用天气预报m3u文件
 
@@ -26,10 +27,15 @@ node app.js > tq.m3u
 ### 食用m3u文件：
 - VLC播放器：⌘ + n 以上m3u网址
 - IINA播放器：⇧ + ⌘ + o 以上m3u网址
-- [TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)，可 以此配置为专用的天气预报电视app，效果如同：
+- 智能电视或电视盒子上利用[TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)，通过如图设置（并设置启动app直接进入直播），可作为专用的天气预报、气象分析电视app，效果如图：
 
 ![设置](tvset.jpeg)
 ![效果](tv.jpeg)
 
 ### 微信打赏🙏：
 ![微信打赏](wxds.JPG)
+
+### 有待完成
+数据源1的农业气象视频不再更新，需要利用爬虫，从农业气象微博上获取天气预报，并生成到m3u文件中
+
+https://github.com/dataabc/weibo-crawler
