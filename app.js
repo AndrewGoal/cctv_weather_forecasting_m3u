@@ -88,6 +88,8 @@
 
       let json = await reswb.json();
 
+      console.log(json);
+
       json.data.cards.forEach((card,index) => {
         let duration = card.mblog.page_info.media_info.duration
         let datewb = new Date(card.mblog.created_at)
@@ -98,7 +100,7 @@
             console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${datewb.toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' })}\n${url}`);
         }
         console.log(`#EXTINF:${duration} group-title="农业气象",${datewb.toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }).replace(/\//g, '月').replace(/ /g, '日')}\n${url}`);
-        
+
       });
 
 
