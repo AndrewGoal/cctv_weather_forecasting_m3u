@@ -88,11 +88,12 @@
 
       let json = await reswb.json();
 
-      console.log(`# ${json.data.cards[0].mblog.created_at}`);
+    //   console.log(`# ${json.data.cards[0].mblog.created_at}`);
 
       json.data.cards.forEach((card,index) => {
         let duration = card.mblog.page_info.media_info.duration
         let datewb = new Date(card.mblog.created_at)
+        console.log(`# ${datewb}`);
         let url = card.mblog.page_info.urls.mp4_720p_mp4
 
         if (card.card_type !== 9) return;
