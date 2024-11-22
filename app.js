@@ -88,7 +88,7 @@
 
       let json = await reswb.json();
 
-      console.log(json);
+      console.log(json.data.cards[0]);
 
       json.data.cards.forEach((card,index) => {
         let duration = card.mblog.page_info.media_info.duration
