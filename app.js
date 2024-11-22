@@ -45,7 +45,7 @@
         });
 
         let text = await res.text();
-        let data = JSON.parse(text.slice(text.indexOf('(') + 1, text.lastIndexOf(')')));
+        let data = JSON.parse(text.slice(text.indexOf('(') + 1, text.lastIndexOf(')')));    
         // console.log(data);
         
         let tvg_name = `${group_name}${data.data[0].pubDate.slice(-8,-3)}`;
@@ -61,6 +61,48 @@
         console.log(playlist);
         
     }
+
+    let reswb = await fetch("https://m.weibo.cn/api/container/getIndex?luicode=10000011&lfid=1005051969156553&type=uid&value=1969156553&containerid=1076031969156553", {
+        "headers": {
+          "accept": "application/json, text/plain, */*",
+          "accept-language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
+          "cache-control": "no-cache",
+          "mweibo-pwa": "1",
+          "pragma": "no-cache",
+          "priority": "u=1, i",
+          "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"macOS\"",
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-origin",
+          "x-requested-with": "XMLHttpRequest",
+          "x-xsrf-token": "02e996",
+          "cookie": "_T_WM=26681150684; MLOGIN=0; WEIBOCN_FROM=1110106030; XSRF-TOKEN=02e996; mweibo_short_token=c86832c9b3; M_WEIBOCN_PARAMS=luicode%3D10000011%26lfid%3D1005051969156553%26oid%3D5103586063945698%26fid%3D1005051969156553%26uicode%3D10000011",
+          "Referer": "https://m.weibo.cn/u/1969156553?luicode=10000011&lfid=1005051969156553",
+          "Referrer-Policy": "strict-origin-when-cross-origin"
+        },
+        "body": null,
+        "method": "GET"
+      });
+
+      let json = await reswb.json();
+
+      json.data.cards.forEach((card,index) => {
+        let duration = card.mblog.page_info.media_info.duration
+        // let datawb = card.mblog.created_at
+        let datewb = new Date(card.mblog.created_at)
+        let url = card.mblog.page_info.urls.mp4_720p_mp4
+
+        if (card.card_type !== 9) return;
+        if (index == 0){
+            console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${`${datewb.getHours()}`.padStart(2, '0')}:${`${datewb.getMinutes()}`.padStart(2, '0')}\n${url}`);
+        }
+        console.log(`#EXTINF:${duration} group-title="农业气象",${`${datewb.getMonth()+1}月${datewb.getDate()}日${`${datewb.getHours()}`.padStart(2, '0')}:${`${datewb.getMinutes()}`.padStart(2, '0')}`}\n${url}`);
+            
+      });
+
+
     
 })();
 
