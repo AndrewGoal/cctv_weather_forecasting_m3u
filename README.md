@@ -36,6 +36,4 @@ node app.js > tq.m3u
 ![微信打赏](wxds.JPG)
 
 ### 有待完成
-数据源1的农业气象视频不再更新，需要利用爬虫，从农业气象微博上获取天气预报，并生成到m3u文件中
-
-https://github.com/dataabc/weibo-crawler
+✅ 数据源1的农业气象视频不再更新，需要 ~~利用[爬虫](https://github.com/dataabc/weibo-crawler)，~~ 从数据源2——农业气象微博上获取，并生成到m3u文件中
