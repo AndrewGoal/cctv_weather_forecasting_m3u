@@ -1,5 +1,5 @@
 (async () => {
-
+    // return
     let urls = [
         'https://www.weather.com.cn/pubm/video_lianbo_2021.htm',
         'https://www.weather.com.cn/pubm/zhaowen.htm',
@@ -90,16 +90,15 @@
 
       json.data.cards.forEach((card,index) => {
         let duration = card.mblog.page_info.media_info.duration
-        // let datawb = card.mblog.created_at
         let datewb = new Date(card.mblog.created_at)
         let url = card.mblog.page_info.urls.mp4_720p_mp4
 
         if (card.card_type !== 9) return;
         if (index == 0){
-            console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${`${datewb.getHours()}`.padStart(2, '0')}:${`${datewb.getMinutes()}`.padStart(2, '0')}\n${url}`);
+            console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${datewb.toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' })}\n${url}`);
         }
-        console.log(`#EXTINF:${duration} group-title="农业气象",${`${datewb.getMonth()+1}月${datewb.getDate()}日${`${datewb.getHours()}`.padStart(2, '0')}:${`${datewb.getMinutes()}`.padStart(2, '0')}`}\n${url}`);
-            
+        console.log(`#EXTINF:${duration} group-title="农业气象",${datewb.toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }).replace(/\//g, '月').replace(/ /g, '日')}\n${url}`);
+        
       });
 
 
