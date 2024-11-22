@@ -92,15 +92,15 @@
 
       json.data.cards.forEach((card,index) => {
         let duration = card.mblog.page_info.media_info.duration
-        let datewb = new Date(card.mblog.created_at)
-        console.log(`# ${datewb}`);
+        let datewbISOString = toISODateFMTbyTimezoneOffset(new Date(card.mblog.created_at),-480);
+        // console.log(`# ${datewbISOString}`);
         let url = card.mblog.page_info.urls.mp4_720p_mp4
 
         if (card.card_type !== 9) return;
         if (index == 0){
-            console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${datewb.toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' })}\n${url}`);
+            console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(11,16)}\n${url}`);
         }
-        console.log(`#EXTINF:${duration} group-title="农业气象",${datewb.toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }).replace(/\//g, '月').replace(/ /g, '日')}\n${url}`);
+        console.log(`#EXTINF:${duration} group-title="农业气象",${datewbISOString.slice(5, 16).replace('-','月').replace('T','日')}\n${url}`);
 
       });
 
@@ -109,3 +109,27 @@
 })();
 
 
+
+/**
+ * 将给定的日期对象转换为带有指定时区偏移的ISO格式日期字符串
+ * 
+ * @param {Date} date - 需要转换的日期对象
+ * @param {number} [timezoneMinuteOffset] - 时区偏移量，以分钟为单位，默认为当前时区偏移，上海所在的东八区为-480
+ * @returns {string} - 转换后的ISO格式日期字符串，带有指定的时区偏移
+ */
+function toISODateFMTbyTimezoneOffset(date, timezoneMinuteOffset) {
+    // 如果未提供时区偏移量，则使用当前时区的偏移量
+    timezoneMinuteOffset = timezoneMinuteOffset || new Date().getTimezoneOffset();
+    
+    // 创建一个新的日期对象，该对象根据提供的时区偏移量进行了调整
+    // 这里通过将日期的时间设置为1970年1月1日，并应用时区偏移来实现
+    const adjustedDate = new Date(date.getTime() + Date.UTC(1970, 0, 1, -timezoneMinuteOffset / 60));
+    
+    // 将调整后的日期对象转换为ISO格式字符串，并移除末尾的'Z'（表示零时区偏移）
+    // 然后根据提供的时区偏移量添加相应的时区偏移到字符串末尾
+    return adjustedDate.toISOString()
+        .replace('Z', `+${('0' + (timezoneMinuteOffset * -1 / 60)).slice(-2)}:00`);
+  }
+  
+//   console.log(toISODateFMTbyTimezoneOffset(new Date()));
+  
