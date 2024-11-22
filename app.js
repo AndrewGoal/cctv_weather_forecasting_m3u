@@ -23,9 +23,10 @@
         // '英语台',
         // '农业气象'
     ];
-    
-    console.log(`#EXTM3U`);
-    
+
+    let latests = [];
+    let m3utext = '';
+        
     for (let i = 0; i < urls.length; i++) {
         const url = urls[i];
         const group_name = group_names[i];
@@ -50,7 +51,7 @@
         if (group_name != '中央四') {
 
             let tvg_name = `${group_name}${data.data[0].pubDate.slice(-11,-3).replace(' ','日')}`;
-            console.log(`#EXTINF:-1 group-title="最新天气",${tvg_name}\n${data.data[0].url}`);
+            latests.push({text:`#EXTINF:-1 group-title="最新天气",${tvg_name}\n${data.data[0].url}`,pubDate:data.data[0].pubDate});
                 
         } 
         
@@ -59,27 +60,27 @@
             let _tvg_name = item.pubDate.slice(-14,-3).replace('-','月').replace(' ','日');
             if (item.title == '《天气预报》04:54') {
                 if (index < 3) {
-                    console.log(`#EXTINF:-1 group-title="最新天气",全球气象${_tvg_name.slice(-8,-5)}04:54\n${data.data[0].url}`);                    
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",全球气象${_tvg_name.slice(-8,-5)}04:54\n${data.data[0].url}`,pubDate:item.pubDate});
                 }
                 return `#EXTINF:-1 group-title="全球气象",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}04:54\n${item.url}`                
             }
             if (item.title == '《天气预报》12:54') {
                 if (index < 3) {
-                    console.log(`#EXTINF:-1 group-title="最新天气",中央四午${_tvg_name.slice(-8,-5)}12:54\n${data.data[0].url}`);                    
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",中央四午${_tvg_name.slice(-8,-5)}12:54\n${data.data[0].url}`,pubDate:item.pubDate});
                 }
                 return `#EXTINF:-1 group-title="中央四午",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}12:54\n${item.url}`                
             }
             if (item.title == '《天气预报》21:58') {
                 if (index < 3) {
-                    console.log(`#EXTINF:-1 group-title="最新天气",中央四晚${_tvg_name.slice(-8,-5)}21:58\n${data.data[0].url}`);                    
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",中央四晚${_tvg_name.slice(-8,-5)}21:58\n${data.data[0].url}`,pubDate:item.pubDate});
                 }
                 return `#EXTINF:-1 group-title="中央四晚",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}21:58\n${item.url}`                
             }
             return `#EXTINF:-1 group-title="${group_name}",${_tvg_name}\n${item.url}`
         }).join('\n');
-            
-        console.log(playlist);
-        
+
+        m3utext += `\n${playlist}`;     
+
     }
 
     let reswb = await fetch("https://m.weibo.cn/api/container/getIndex?luicode=10000011&lfid=1005051969156553&type=uid&value=1969156553&containerid=1076031969156553", {
@@ -118,13 +119,15 @@
 
         if (card.card_type !== 9) return;
         if (index == 0){
-            console.log(`#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(8,16).replace('T','日')}\n${url}`);
+            latests.push({text:`#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(8,16).replace('T','日')}\n${url}`,pubDate:datewbISOString});
         }
-        console.log(`#EXTINF:${duration} group-title="农业气象",${datewbISOString.slice(5, 16).replace('-','月').replace('T','日')}\n${url}`);
+        m3utext += `\n#EXTINF:${duration} group-title="农业气象",${datewbISOString.slice(5, 16).replace('-','月').replace('T','日')}\n${url}`
 
       });
+    m3utext = `#EXTM3U\n${latests.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate)).map(item=>item.text).join('\n')}${m3utext}`
 
-
+    console.log(m3utext);
+    
     
 })();
 
