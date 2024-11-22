@@ -60,19 +60,19 @@
             let _tvg_name = item.pubDate.slice(-14,-3).replace('-','月').replace(' ','日');
             if (item.title == '《天气预报》04:54') {
                 if (index < 3) {
-                    latests.push({text:`#EXTINF:-1 group-title="最新天气",全球气象${_tvg_name.slice(-8,-5)}04:54\n${data.data[0].url}`,pubDate:`${data.data[0].pubDate.slice(-19,-8).replace(' ','T')}04:54:00.000+08:00`});
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",全球气象${_tvg_name.slice(-8,-5)}04:54\n${item.url}`,pubDate:`${item.pubDate.slice(-19,-8).replace(' ','T')}04:54:00.000+08:00`});
                 }
                 return `#EXTINF:-1 group-title="全球气象",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}04:54\n${item.url}`                
             }
             if (item.title == '《天气预报》12:54') {
                 if (index < 3) {
-                    latests.push({text:`#EXTINF:-1 group-title="最新天气",中央四午${_tvg_name.slice(-8,-5)}12:54\n${data.data[0].url}`,pubDate:`${data.data[0].pubDate.slice(-19,-8).replace(' ','T')}12:54:00.000+08:00`});
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",中央四午${_tvg_name.slice(-8,-5)}12:54\n${item.url}`,pubDate:`${item.pubDate.slice(-19,-8).replace(' ','T')}12:54:00.000+08:00`});
                 }
                 return `#EXTINF:-1 group-title="中央四午",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}12:54\n${item.url}`                
             }
             if (item.title == '《天气预报》21:58') {
                 if (index < 3) {
-                    latests.push({text:`#EXTINF:-1 group-title="最新天气",中央四晚${_tvg_name.slice(-8,-5)}21:58\n${data.data[0].url}`,pubDate:`${data.data[0].pubDate.slice(-19,-8).replace(' ','T')}21:58:00.000+08:00`});
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",中央四晚${_tvg_name.slice(-8,-5)}21:58\n${item.url}`,pubDate:`${item.pubDate.slice(-19,-8).replace(' ','T')}21:58:00.000+08:00`});
                 }
                 return `#EXTINF:-1 group-title="中央四晚",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}21:58\n${item.url}`                
             }
@@ -109,7 +109,6 @@
 
       let json = await reswb.json();
 
-    //   console.log(`# ${json.data.cards[0].mblog.created_at}`);
 
       json.data.cards.forEach((card,index) => {
         let duration = card.mblog.page_info.media_info.duration
