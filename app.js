@@ -3,7 +3,7 @@
     let latests = [];
     let m3utext = '';
 
-    let cateids = [101529,101559];
+    let cateids = [101559,101529];
     let group_sd_names = ["山东新闻晚","山东卫视早"];
     let group_sd_times = ["19:31","06:56"];
 
