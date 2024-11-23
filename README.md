@@ -1,9 +1,22 @@
-# cctv_weather_forecasting_m3u
+# ☁️气象万千🌈天气预报☀️气象分析⚡️m3u🌧️列表
 cctv 中央电视台 天气预报 气象分析 m3u文件生成
+
+- [☁️气象万千🌈天气预报☀️气象分析⚡️m3u🌧️列表](#️气象万千天气预报️气象分析️m3u️列表)
+  - [数据源](#数据源)
+  - [生成和使用天气预报m3u文件](#生成和使用天气预报m3u文件)
+    - [样例：](#样例)
+    - [本地运行：](#本地运行)
+    - [在线获取最新的m3u文件：](#在线获取最新的m3u文件)
+    - [食用m3u文件：](#食用m3u文件)
+    - [微信打赏🙏：](#微信打赏)
+    - [有待完成](#有待完成)
+
 
 ## 数据源
 1. https://www.weather.com.cn/video/ylist.shtml
 2. https://m.weibo.cn/u/1969156553
+3. https://sdxw.iqilu.com/share/dHYtMjEtNTYyNjU0OQ.html#/
+4. https://sdxw.iqilu.com/share/dHYtMjEtNTYyNTg5MQ.html#/
 
 ## 生成和使用天气预报m3u文件
 
@@ -36,4 +49,5 @@ node app.js > tq.m3u
 ![微信打赏](wxds.JPG)
 
 ### 有待完成
-✅ 数据源1的农业气象视频不再更新，需要 ~~利用[爬虫](https://github.com/dataabc/weibo-crawler)，~~ 从数据源2——农业气象微博上获取，并生成到m3u文件中
+- ✅ 数据源1的农业气象视频不再更新，需要 ~~利用[爬虫](https://github.com/dataabc/weibo-crawler)，~~ 从数据源2——农业气象微博上获取，并生成到m3u文件中
+- 🟨 数据源3、4
