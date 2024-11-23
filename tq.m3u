@@ -1,24 +1,46 @@
 #EXTM3U
-#EXTINF:-1 group-title="最新天气",中央四晚22日21:58
-https://vod.weathertv.cn/video/2024/11/22/202411221732286645064.mp4
-#EXTINF:-1 group-title="最新天气",中央一晚22日20:13
-https://vod.weathertv.cn/video/2024/11/22/202411221732288446118.mp4
-#EXTINF:91.021 group-title="最新天气",农业气象22日19:00
-https://f.video.weibocdn.com/o0/CJIC6ZjElx08jMWa3K9G01041200nLNp0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=oCtaWCbul7&KID=unistore,video
-#EXTINF:-1 group-title="最新天气",体育天气22日13:18
-https://vod.weathertv.cn/video/2024/11/22/202411221732252723276.mp4
-#EXTINF:-1 group-title="最新天气",中央七22日13:18
-https://vod.weathertv.cn/video/2024/11/22/202411221732252722335.mp4
-#EXTINF:-1 group-title="最新天气",中央一午22日13:13
-https://vod.weathertv.cn/video/2024/11/22/202411221732252420833.mp4
-#EXTINF:-1 group-title="最新天气",中央四午22日12:54
-https://vod.weathertv.cn/video/2024/11/22/202411221732254224645.mp4
-#EXTINF:-1 group-title="最新天气",中央13早22日08:43
-https://vod.weathertv.cn/video/2024/11/22/202411221732236214047.mp4
-#EXTINF:-1 group-title="最新天气",中央二早22日08:43
-https://vod.weathertv.cn/video/2024/11/22/202411221732236212856.mp4
-#EXTINF:-1 group-title="最新天气",全球气象22日04:54
-https://vod.weathertv.cn/video/2024/11/22/202411221732225410212.mp4
+#EXTINF:-1 group-title="最新天气",中央四晚23日21:58
+https://vod.weathertv.cn/video/2024/11/23/202411231732373084775.mp4
+#EXTINF:-1 group-title="最新天气",中央一晚23日20:14
+https://vod.weathertv.cn/video/2024/11/23/202411231732374885689.mp4
+#EXTINF:90.767 group-title="最新天气",农业气象23日19:44
+https://f.video.weibocdn.com/o0/R1PycoMIlx08jOIW1y2I01041200jgHh0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=jtD23pbEKe&KID=unistore,video
+#EXTINF:-1 group-title="最新天气",山东新闻晚23日19:31
+http://stream5.iqilu.com/vod_bag_2016//2024/11/23/2e3977962d264bea890cd1bbad3176df/2e3977962d264bea890cd1bbad3176df_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="最新天气",中央七23日13:19
+https://vod.weathertv.cn/video/2024/11/23/202411231732339164000.mp4
+#EXTINF:-1 group-title="最新天气",中央一午23日13:14
+https://vod.weathertv.cn/video/2024/11/23/202411231732338863155.mp4
+#EXTINF:-1 group-title="最新天气",体育天气23日13:14
+https://vod.weathertv.cn/video/2024/11/23/202411231732338861801.mp4
+#EXTINF:-1 group-title="最新天气",中央四午23日12:54
+https://vod.weathertv.cn/video/2024/11/23/202411231732340364866.mp4
+#EXTINF:-1 group-title="最新天气",中央13早23日08:44
+https://vod.weathertv.cn/video/2024/11/23/202411231732322656023.mp4
+#EXTINF:-1 group-title="最新天气",中央二早23日08:44
+https://vod.weathertv.cn/video/2024/11/23/202411231732322654865.mp4
+#EXTINF:-1 group-title="最新天气",山东卫视早23日06:56
+http://stream4.iqilu.com/vod_bag_2016//2024/11/23/d62aeaf2d749468aac3a10085945cedf/d62aeaf2d749468aac3a10085945cedf_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="最新天气",北半球气象23日04:54
+https://vod.weathertv.cn/video/2024/11/23/202411231732311851418.mp4
+#EXTINF:-1 group-title="山东新闻晚",11月23日19:31
+http://stream5.iqilu.com/vod_bag_2016//2024/11/23/2e3977962d264bea890cd1bbad3176df/2e3977962d264bea890cd1bbad3176df_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东新闻晚",11月22日19:31
+http://stream4.iqilu.com/vod_bag_2016//2024/11/22/906432c47474440eaef865e7acb2ec35/906432c47474440eaef865e7acb2ec35_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东新闻晚",11月21日19:31
+http://stream.iqilu.com/vod_bag_2016//2024/11/21/3249a9f8206242f2b40193af5b0f4dcf/3249a9f8206242f2b40193af5b0f4dcf_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东新闻晚",11月20日19:31
+http://stream.iqilu.com/vod_bag_2016//2024/11/20/383ef19434264249bf9951e0fcf767cf/383ef19434264249bf9951e0fcf767cf_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东卫视早",11月23日06:56
+http://stream4.iqilu.com/vod_bag_2016//2024/11/23/d62aeaf2d749468aac3a10085945cedf/d62aeaf2d749468aac3a10085945cedf_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东卫视早",11月22日06:56
+http://stream4.iqilu.com/vod_bag_2016//2024/11/22/2f22a5ec22e548f795904a9d2b0d8d6d/2f22a5ec22e548f795904a9d2b0d8d6d_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东卫视早",11月21日06:56
+http://stream5.iqilu.com/vod_bag_2016//2024/11/21/7b1004063f914355a24ad13b77c98221/7b1004063f914355a24ad13b77c98221_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="山东卫视早",11月20日06:56
+http://stream5.iqilu.com/vod_bag_2016//2024/11/20/7ff54863740341beb7bb63639ad77c54/7ff54863740341beb7bb63639ad77c54_H264_mp4_500K.mp4
+#EXTINF:-1 group-title="中央一晚",11月23日20:14
+https://vod.weathertv.cn/video/2024/11/23/202411231732374885689.mp4
 #EXTINF:-1 group-title="中央一晚",11月22日20:13
 https://vod.weathertv.cn/video/2024/11/22/202411221732288446118.mp4
 #EXTINF:-1 group-title="中央一晚",11月21日20:13
@@ -97,8 +119,10 @@ https://vod.weathertv.cn/video/2024/10/17/202410171729178035095.mp4
 https://vod.weathertv.cn/video/2024/10/16/202410161729091591184.mp4
 #EXTINF:-1 group-title="中央一晚",10月15日20:17
 https://vod.weathertv.cn/video/2024/10/15/202410151729005156916.mp4
-#EXTINF:-1 group-title="中央一晚",10月14日20:16
-https://vod.weathertv.cn/video/2024/10/14/202410141728918721306.mp4
+#EXTINF:-1 group-title="中央13早",11月23日08:44
+https://vod.weathertv.cn/video/2024/11/23/202411231732322656023.mp4
+#EXTINF:-1 group-title="中央13早",11月23日07:44
+https://vod.weathertv.cn/video/2024/11/23/202411231732319052612.mp4
 #EXTINF:-1 group-title="中央13早",11月22日08:43
 https://vod.weathertv.cn/video/2024/11/22/202411221732236214047.mp4
 #EXTINF:-1 group-title="中央13早",11月22日07:43
@@ -175,10 +199,8 @@ https://vod.weathertv.cn/video/2024/11/5/202411051730763698009.mp4
 https://vod.weathertv.cn/video/2024/11/4/202411041730680856043.mp4
 #EXTINF:-1 group-title="中央13早",11月04日07:40
 https://vod.weathertv.cn/video/2024/11/4/202411041730677253919.mp4
-#EXTINF:-1 group-title="中央13早",11月03日08:40
-https://vod.weathertv.cn/video/2024/11/3/202411031730594415054.mp4
-#EXTINF:-1 group-title="中央13早",11月03日07:45
-https://vod.weathertv.cn/video/2024/11/3/202411031730591113874.mp4
+#EXTINF:-1 group-title="中央一午",11月23日13:14
+https://vod.weathertv.cn/video/2024/11/23/202411231732338863155.mp4
 #EXTINF:-1 group-title="中央一午",11月22日13:13
 https://vod.weathertv.cn/video/2024/11/22/202411221732252420833.mp4
 #EXTINF:-1 group-title="中央一午",11月21日13:12
@@ -257,8 +279,8 @@ https://vod.weathertv.cn/video/2024/10/17/202410171729142009298.mp4
 https://vod.weathertv.cn/video/2024/10/16/202410161729055566934.mp4
 #EXTINF:-1 group-title="中央一午",10月15日13:12
 https://vod.weathertv.cn/video/2024/10/15/202410151728969131154.mp4
-#EXTINF:-1 group-title="中央一午",10月14日13:11
-https://vod.weathertv.cn/video/2024/10/14/202410141728882692166.mp4
+#EXTINF:-1 group-title="中央二早",11月23日08:44
+https://vod.weathertv.cn/video/2024/11/23/202411231732322654865.mp4
 #EXTINF:-1 group-title="中央二早",11月22日08:43
 https://vod.weathertv.cn/video/2024/11/22/202411221732236212856.mp4
 #EXTINF:-1 group-title="中央二早",11月21日08:42
@@ -337,88 +359,88 @@ https://vod.weathertv.cn/video/2024/10/17/202410171729125798793.mp4
 https://vod.weathertv.cn/video/2024/10/16/202410161729039364337.mp4
 #EXTINF:-1 group-title="中央二早",10月15日08:42
 https://vod.weathertv.cn/video/2024/10/15/202410151728952929085.mp4
-#EXTINF:-1 group-title="中央二早",10月14日08:46
-https://vod.weathertv.cn/video/2024/10/14/202410141728866790745.mp4
+#EXTINF:-1 group-title="中央四晚",11月23日21:58
+https://vod.weathertv.cn/video/2024/11/23/202411231732373084775.mp4
+#EXTINF:-1 group-title="中央四午",11月23日12:54
+https://vod.weathertv.cn/video/2024/11/23/202411231732340364866.mp4
+#EXTINF:-1 group-title="北半球气象",11月23日04:54
+https://vod.weathertv.cn/video/2024/11/23/202411231732311851418.mp4
 #EXTINF:-1 group-title="中央四晚",11月22日21:58
 https://vod.weathertv.cn/video/2024/11/22/202411221732286645064.mp4
 #EXTINF:-1 group-title="中央四午",11月22日12:54
 https://vod.weathertv.cn/video/2024/11/22/202411221732254224645.mp4
-#EXTINF:-1 group-title="全球气象",11月22日04:54
+#EXTINF:-1 group-title="北半球气象",11月22日04:54
 https://vod.weathertv.cn/video/2024/11/22/202411221732225410212.mp4
 #EXTINF:-1 group-title="中央四晚",11月21日21:58
 https://vod.weathertv.cn/video/2024/11/21/202411211732200204039.mp4
 #EXTINF:-1 group-title="中央四午",11月21日12:54
 https://vod.weathertv.cn/video/2024/11/21/202411211732167782421.mp4
-#EXTINF:-1 group-title="全球气象",11月21日04:54
+#EXTINF:-1 group-title="北半球气象",11月21日04:54
 https://vod.weathertv.cn/video/2024/11/21/202411211732138969988.mp4
 #EXTINF:-1 group-title="中央四晚",11月20日21:58
 https://vod.weathertv.cn/video/2024/11/20/202411201732113763593.mp4
 #EXTINF:-1 group-title="中央四午",11月20日12:54
 https://vod.weathertv.cn/video/2024/11/20/202411201732081342895.mp4
-#EXTINF:-1 group-title="全球气象",11月20日04:54
+#EXTINF:-1 group-title="北半球气象",11月20日04:54
 https://vod.weathertv.cn/video/2024/11/20/202411201732052530933.mp4
 #EXTINF:-1 group-title="中央四晚",11月19日21:58
 https://vod.weathertv.cn/video/2024/11/19/202411191732027324123.mp4
 #EXTINF:-1 group-title="中央四午",11月19日12:54
 https://vod.weathertv.cn/video/2024/11/19/202411191731994900643.mp4
-#EXTINF:-1 group-title="全球气象",11月19日04:54
+#EXTINF:-1 group-title="北半球气象",11月19日04:54
 https://vod.weathertv.cn/video/2024/11/19/202411191731966088689.mp4
 #EXTINF:-1 group-title="中央四晚",11月18日21:58
 https://vod.weathertv.cn/video/2024/11/18/202411181731940881812.mp4
 #EXTINF:-1 group-title="中央四午",11月18日12:54
 https://vod.weathertv.cn/video/2024/11/18/202411181731908455078.mp4
-#EXTINF:-1 group-title="全球气象",11月18日04:54
+#EXTINF:-1 group-title="北半球气象",11月18日04:54
 https://vod.weathertv.cn/video/2024/11/18/202411181731879642369.mp4
 #EXTINF:-1 group-title="中央四晚",11月17日21:58
 https://vod.weathertv.cn/video/2024/11/17/202411171731854434326.mp4
 #EXTINF:-1 group-title="中央四午",11月17日12:54
 https://vod.weathertv.cn/video/2024/11/17/202411171731822015431.mp4
-#EXTINF:-1 group-title="全球气象",11月17日04:54
+#EXTINF:-1 group-title="北半球气象",11月17日04:54
 https://vod.weathertv.cn/video/2024/11/17/202411171731793500663.mp4
 #EXTINF:-1 group-title="中央四晚",11月16日21:58
 https://vod.weathertv.cn/video/2024/11/16/202411161731768293328.mp4
 #EXTINF:-1 group-title="中央四午",11月16日12:54
 https://vod.weathertv.cn/video/2024/11/16/202411161731735573546.mp4
-#EXTINF:-1 group-title="全球气象",11月16日04:54
+#EXTINF:-1 group-title="北半球气象",11月16日04:54
 https://vod.weathertv.cn/video/2024/11/16/202411161731707056981.mp4
 #EXTINF:-1 group-title="中央四晚",11月15日21:58
 https://vod.weathertv.cn/video/2024/11/15/202411151731681850869.mp4
 #EXTINF:-1 group-title="中央四午",11月15日12:54
 https://vod.weathertv.cn/video/2024/11/15/202411151731649426304.mp4
-#EXTINF:-1 group-title="全球气象",11月15日04:54
+#EXTINF:-1 group-title="北半球气象",11月15日04:54
 https://vod.weathertv.cn/video/2024/11/15/202411151731620613054.mp4
 #EXTINF:-1 group-title="中央四晚",11月14日21:58
 https://vod.weathertv.cn/video/2024/11/14/202411141731595407157.mp4
 #EXTINF:-1 group-title="中央四午",11月14日12:54
 https://vod.weathertv.cn/video/2024/11/14/202411141731562985897.mp4
-#EXTINF:-1 group-title="全球气象",11月14日04:54
+#EXTINF:-1 group-title="北半球气象",11月14日04:54
 https://vod.weathertv.cn/video/2024/11/14/202411141731534169940.mp4
 #EXTINF:-1 group-title="中央四晚",11月13日21:58
 https://vod.weathertv.cn/video/2024/11/13/202411131731508964106.mp4
 #EXTINF:-1 group-title="中央四午",11月13日12:54
 https://vod.weathertv.cn/video/2024/11/13/202411131731476545181.mp4
-#EXTINF:-1 group-title="全球气象",11月13日04:54
+#EXTINF:-1 group-title="北半球气象",11月13日04:54
 https://vod.weathertv.cn/video/2024/11/13/202411131731447733077.mp4
 #EXTINF:-1 group-title="中央四晚",11月12日21:58
 https://vod.weathertv.cn/video/2024/11/12/202411121731422526794.mp4
 #EXTINF:-1 group-title="中央四午",11月12日12:54
 https://vod.weathertv.cn/video/2024/11/12/202411121731390107033.mp4
-#EXTINF:-1 group-title="全球气象",11月12日04:54
+#EXTINF:-1 group-title="北半球气象",11月12日04:54
 https://vod.weathertv.cn/video/2024/11/12/202411121731361296165.mp4
 #EXTINF:-1 group-title="中央四晚",11月11日21:58
 https://vod.weathertv.cn/video/2024/11/11/202411111731336088048.mp4
 #EXTINF:-1 group-title="中央四午",11月11日12:54
 https://vod.weathertv.cn/video/2024/11/11/202411111731303664482.mp4
-#EXTINF:-1 group-title="全球气象",11月11日04:54
+#EXTINF:-1 group-title="北半球气象",11月11日04:54
 https://vod.weathertv.cn/video/2024/11/11/202411111731274852081.mp4
 #EXTINF:-1 group-title="中央四晚",11月10日21:58
 https://vod.weathertv.cn/video/2024/11/10/202411101731249643609.mp4
-#EXTINF:-1 group-title="中央四午",11月10日12:54
-https://vod.weathertv.cn/video/2024/11/10/202411101731217222010.mp4
-#EXTINF:-1 group-title="全球气象",11月10日04:54
-https://vod.weathertv.cn/video/2024/11/10/202411101731188703725.mp4
-#EXTINF:-1 group-title="中央四晚",11月09日21:58
-https://vod.weathertv.cn/video/2024/11/9/202411091731163497123.mp4
+#EXTINF:-1 group-title="体育天气",11月23日13:14
+https://vod.weathertv.cn/video/2024/11/23/202411231732338861801.mp4
 #EXTINF:-1 group-title="体育天气",11月22日13:18
 https://vod.weathertv.cn/video/2024/11/22/202411221732252723276.mp4
 #EXTINF:-1 group-title="体育天气",11月21日13:18
@@ -497,8 +519,8 @@ https://vod.weathertv.cn/video/2024/10/17/202410171729142312589.mp4
 https://vod.weathertv.cn/video/2024/10/16/202410161729055869274.mp4
 #EXTINF:-1 group-title="体育天气",10月15日13:17
 https://vod.weathertv.cn/video/2024/10/15/202410151728969433222.mp4
-#EXTINF:-1 group-title="体育天气",10月14日13:16
-https://vod.weathertv.cn/video/2024/10/14/202410141728882994354.mp4
+#EXTINF:-1 group-title="中央七",11月23日13:19
+https://vod.weathertv.cn/video/2024/11/23/202411231732339164000.mp4
 #EXTINF:-1 group-title="中央七",11月22日13:18
 https://vod.weathertv.cn/video/2024/11/22/202411221732252722335.mp4
 #EXTINF:-1 group-title="中央七",11月21日13:18
@@ -577,25 +599,23 @@ https://vod.weathertv.cn/video/2024/10/17/202410171729142311337.mp4
 https://vod.weathertv.cn/video/2024/10/16/202410161729055868285.mp4
 #EXTINF:-1 group-title="中央七",10月15日13:17
 https://vod.weathertv.cn/video/2024/10/15/202410151728969432296.mp4
-#EXTINF:-1 group-title="中央七",10月14日13:16
-https://vod.weathertv.cn/video/2024/10/14/202410141728882993532.mp4
+#EXTINF:90.767 group-title="农业气象",11月23日19:44
+https://f.video.weibocdn.com/o0/R1PycoMIlx08jOIW1y2I01041200jgHh0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=jtD23pbEKe&KID=unistore,video
+#EXTINF:91.021 group-title="农业气象",11月23日13:30
+https://f.video.weibocdn.com/o0/f2ghSmUSlx08jMWqcf3201041200ic8m0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=r5CT4VRsmF&KID=unistore,video
 #EXTINF:91.021 group-title="农业气象",11月22日19:00
-https://f.video.weibocdn.com/o0/CJIC6ZjElx08jMWa3K9G01041200nLNp0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=oCtaWCbul7&KID=unistore,video
+https://f.video.weibocdn.com/o0/CJIC6ZjElx08jMWa3K9G01041200nLNp0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=MCKR9X%2Fikb&KID=unistore,video
 #EXTINF:91.021 group-title="农业气象",11月22日13:00
-https://f.video.weibocdn.com/o0/axSSQvhwlx08jLrzMOjK01041200kdBt0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=Ut%2Fe1sdoX6&KID=unistore,video
+https://f.video.weibocdn.com/o0/axSSQvhwlx08jLrzMOjK01041200kdBt0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=iRx%2Bjkv1iI&KID=unistore,video
 #EXTINF:91.021 group-title="农业气象",11月21日19:00
-https://f.video.weibocdn.com/o0/lfqDrP4klx08jLrpZGFG01041200kuA90E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=GBITbzo5JY&KID=unistore,video
+https://f.video.weibocdn.com/o0/lfqDrP4klx08jLrpZGFG01041200kuA90E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=I6cfjgdGEF&KID=unistore,video
 #EXTINF:91.021 group-title="农业气象",11月21日13:14
-https://f.video.weibocdn.com/o0/C2lu7SlElx08jJJUqvAY01041200hJar0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=uFIUNkwp59&KID=unistore,video
+https://f.video.weibocdn.com/o0/C2lu7SlElx08jJJUqvAY01041200hJar0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=IsPrE7Jc1R&KID=unistore,video
 #EXTINF:91.208 group-title="农业气象",11月20日19:00
-https://f.video.weibocdn.com/o0/lbIhN81Ulx08jJJKWLnG01041200kqnb0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=MKMC3FqHsw&KID=unistore,video
+https://f.video.weibocdn.com/o0/lbIhN81Ulx08jJJKWLnG01041200kqnb0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=YqyPyZIxFb&KID=unistore,video
 #EXTINF:91.021 group-title="农业气象",11月20日16:59
-https://f.video.weibocdn.com/o0/1LbYeOAqlx08jJLNar2001041200izmn0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=%2BL1GyMzFaA&KID=unistore,video
+https://f.video.weibocdn.com/o0/1LbYeOAqlx08jJLNar2001041200izmn0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=qKnVv34V1I&KID=unistore,video
 #EXTINF:90.743 group-title="农业气象",11月20日16:58
-https://f.video.weibocdn.com/o0/QQkDtmtNlx08jJLHNauY01041200luop0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=31dbZzN%2F3P&KID=unistore,video
+https://f.video.weibocdn.com/o0/QQkDtmtNlx08jJLHNauY01041200luop0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=3FC4CAzV8%2B&KID=unistore,video
 #EXTINF:91.021 group-title="农业气象",11月20日13:00
-https://f.video.weibocdn.com/o0/Nx2VZlSTlx08jI3TjR0401041200lJAL0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=RHj9Abs5nO&KID=unistore,video
-#EXTINF:90.581 group-title="农业气象",11月19日19:00
-https://f.video.weibocdn.com/o0/N2By71b0lx08jI3CoZ3O01041200iTvO0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=mswKPL7g0e&KID=unistore,video
-#EXTINF:91.021 group-title="农业气象",11月18日13:00
-https://f.video.weibocdn.com/o0/mRM5ePPplx08jESzs9yw01041200iEVy0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732307598&ssig=AfdM8jzfHF&KID=unistore,video
+https://f.video.weibocdn.com/o0/Nx2VZlSTlx08jI3TjR0401041200lJAL0E010.mp4?label=mp4_720p&template=1280x720.25.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1732384181&ssig=AVEXGAUhsk&KID=unistore,video

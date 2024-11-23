@@ -1,4 +1,62 @@
 (async () => {
+
+    let latests = [];
+    let m3utext = '';
+
+    let cateids = [101529,101559];
+    let group_sd_names = ["山东新闻晚","山东卫视早"];
+    let group_sd_times = ["19:31","06:56"];
+
+
+    for (let index = 0; index < cateids.length; index++) {
+        let cateid = cateids[index];
+        let now = new Date();
+        let latestIndex = 0;
+        for (let i = 0; i < 5; i++) {
+            let date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
+            let dateISOStringSD = toISODateFMTbyTimezoneOffset(date, -480).slice(0, 10);
+            // console.log(dateISOStringSD);
+            let res_sd = await fetch(`https://sdxw.iqilu.com/v2/app/media/program/video/lists?cateid=${cateid}&plat=cq&date=${dateISOStringSD}&page=1`, {
+                "headers": {
+                    "accept": "*/*",
+                    "accept-language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
+                    "cache-control": "no-cache",
+                    "content-type": "application/x-www-form-urlencoded",
+                    "cq-token": "",
+                    "orgid": "21",
+                    "pragma": "no-cache",
+                    "sec-fetch-dest": "empty",
+                    "sec-fetch-mode": "cors",
+                    "sec-fetch-site": "same-origin",
+                    "cookie": "Hm_lvt_4306b4ece03aa3d1c0648f71c5cc71fc=1732361356; HMACCOUNT=73122896BC3D293B; Hm_lpvt_4306b4ece03aa3d1c0648f71c5cc71fc=1732361402",
+                    "Referer": "https://sdxw.iqilu.com/share/dHYtMjEtNTYyNjU0OQ.html",
+                    "Referrer-Policy": "strict-origin-when-cross-origin"
+                },
+                "body": null,
+                "method": "GET"
+            });
+
+            let json_sd = await res_sd.json();
+            // console.log(json_sd.data.infos[0].media[0]);
+            if (json_sd.data.infos.length == 0) {
+                continue;
+            }
+            if (latestIndex == 0) {
+                latests.push({text:`#EXTINF:-1 group-title="最新天气",${group_sd_names[index]}${dateISOStringSD.slice(-2)}日${group_sd_times[index]}\n${json_sd.data.infos[0].media[0].url}`,pubDate:`${dateISOStringSD}T${group_sd_times[index]}:00.000+08:00`});
+                
+            }
+            m3utext += `\n#EXTINF:-1 group-title="${group_sd_names[index]}",${dateISOStringSD.slice(-5).replace('-','月')}日${group_sd_times[index]}\n${json_sd.data.infos[0].media[0].url}`;
+            ++latestIndex;
+
+        }
+    }
+
+    // console.log({latests});
+
+    // m3utext = `#EXTM3U\n${latests.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate)).map(item=>item.text).join('\n')}${m3utext}`
+    // console.log(m3utext);
+
+
     // return
     let urls = [
         'https://www.weather.com.cn/pubm/video_lianbo_2021.htm',
@@ -23,9 +81,6 @@
         // '英语台',
         // '农业气象'
     ];
-
-    let latests = [];
-    let m3utext = '';
         
     for (let i = 0; i < urls.length; i++) {
         const url = urls[i];
@@ -60,9 +115,9 @@
             let _tvg_name = item.pubDate.slice(-14,-3).replace('-','月').replace(' ','日');
             if (item.title == '《天气预报》04:54') {
                 if (index < 3) {
-                    latests.push({text:`#EXTINF:-1 group-title="最新天气",全球气象${_tvg_name.slice(-8,-5)}04:54\n${item.url}`,pubDate:`${item.pubDate.slice(-19,-8).replace(' ','T')}04:54:00.000+08:00`});
+                    latests.push({text:`#EXTINF:-1 group-title="最新天气",北半球气象${_tvg_name.slice(-8,-5)}04:54\n${item.url}`,pubDate:`${item.pubDate.slice(-19,-8).replace(' ','T')}04:54:00.000+08:00`});
                 }
-                return `#EXTINF:-1 group-title="全球气象",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}04:54\n${item.url}`                
+                return `#EXTINF:-1 group-title="北半球气象",${item.pubDate.slice(-14,-8).replace('-','月').replace(' ','日')}04:54\n${item.url}`                
             }
             if (item.title == '《天气预报》12:54') {
                 if (index < 3) {
@@ -123,7 +178,7 @@
 
     });
 
-
+    // console.log(latests);
     m3utext = `#EXTM3U\n${latests.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate)).map(item=>item.text).join('\n')}${m3utext}`
 
     console.log(m3utext);
@@ -137,7 +192,7 @@
  * 将给定的日期对象转换为带有指定时区偏移的ISO格式日期字符串
  * 
  * @param {Date} date - 需要转换的日期对象
- * @param {number} [timezoneMinuteOffset] - 时区偏移量，以分钟为单位，默认为当前时区偏移，上海所在的东八区为-480
+ * @param {number} [timezoneMinuteOffset] - 时区偏移量，以分钟为单位，默认为运行时的时区偏移，上海所在的东八区为-480
  * @returns {string} - 转换后的ISO格式日期字符串，带有指定的时区偏移
  */
 function toISODateFMTbyTimezoneOffset(date, timezoneMinuteOffset) {
