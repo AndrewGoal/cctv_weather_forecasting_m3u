@@ -14,8 +14,9 @@
         for (let index = 0; index < cateids.length; index++) {
             let cateid = cateids[index];
             let now = new Date();
-            let latestIndex = 0;
-            for (let i = 0; i < 5; i++) {
+            let maxDate = 7;
+            let maxtries = maxDate;
+            for (let i = 0; i < maxtries; i++) {
                 let date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
                 let dateISOStringSD = toISODateFMTbyTimezoneOffset(date, -480).slice(0, 10);
                 // console.log(dateISOStringSD);
@@ -42,14 +43,14 @@
                 let json_sd = await res_sd.json();
                 // console.log(json_sd.data.infos[0].media[0]);
                 if (json_sd.data.infos.length == 0) {
+                    ++maxtries;
+                    if (maxtries > maxDate + 10) break;
                     continue;
                 }
-                if (latestIndex == 0) {
+                if (maxtries - i == maxDate) {
                     latests.push({ text: `#EXTINF:-1 group-title="最新天气",${group_sd_names[index]}${dateISOStringSD.slice(-2)}日${group_sd_times[index]}\n${json_sd.data.infos[0].media[0].url}`, pubDate: `${dateISOStringSD}T${group_sd_times[index]}:00.000+08:00` });
-
                 }
                 m3utext += `\n#EXTINF:-1 group-title="${group_sd_names[index]}",${dateISOStringSD.slice(-5).replace('-', '月')}日${group_sd_times[index]}\n${json_sd.data.infos[0].media[0].url}`;
-                ++latestIndex;
 
             }
         }
