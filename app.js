@@ -7,7 +7,7 @@
         // 山东气象，数据源3，4
 
         let cateids = [101559, 101529];
-        let group_sd_names = ["山东新闻晚", "山东卫视早"];
+        let group_sd_names = ["山东晚", "山东早"];
         let group_sd_times = ["19:31", "06:56"];
 
 
@@ -79,7 +79,7 @@
         ];
 
         let group_names = [
-            '中央1七点半',
+            '七点半',
             '中央13早',
             '中央一午',
             '中央二早',
@@ -123,7 +123,7 @@
                 let _tvg_name = item.pubDate.slice(-14, -3).replace('-', '月').replace(' ', '日');
                 if (item.title == '《天气预报》04:54') {
                     if (index < 3) {
-                        latests.push({ text: `#EXTINF:-1 group-title="最新天气",北半球气象${_tvg_name.slice(-8, -5)}04:54\n${item.url}`, pubDate: `${item.pubDate.slice(-19, -8).replace(' ', 'T')}04:54:00.000+08:00` });
+                        latests.push({ text: `#EXTINF:-1 group-title="最新天气",北半球${_tvg_name.slice(-8, -5)}04:54\n${item.url}`, pubDate: `${item.pubDate.slice(-19, -8).replace(' ', 'T')}04:54:00.000+08:00` });
                     }
                     return `#EXTINF:-1 group-title="北半球气象",${item.pubDate.slice(-14, -8).replace('-', '月').replace(' ', '日')}04:54\n${item.url}`
                 }
