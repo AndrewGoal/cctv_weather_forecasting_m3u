@@ -43,6 +43,7 @@ node app.js > tq.m3u
 - 智能电视或电视盒子上利用[TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)，通过如图设置（并设置启动app直接进入直播），可作为专用的天气预报、气象分析电视app，效果如图：
 
 ![设置](tvset.jpeg)
+![缩放设置](tvboxZoomSet.jpg)
 ![效果](tv.jpeg)
 
 ### 微信打赏🙏：
