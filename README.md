@@ -38,6 +38,7 @@ node app.js > tq.m3u
 - 墙内：https://github.moeyy.xyz/https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/releases/latest/download/cctv_weather_forecasting.m3u
 
 ### 食用m3u文件：
+- Mac/iOS平台：[APTV](https://apps.apple.com/tw/app/aptv/id1630403500)
 - VLC播放器：⌘ + n 以上m3u网址
 - IINA播放器：⇧ + ⌘ + o 以上m3u网址
 - 智能电视或电视盒子上利用[TVBoxOSC 20240819-1117版](https://github.com/o0HalfLife0o/TVBoxOSC/releases/tag/20240819-1117)，通过如图设置（并设置启动app直接进入直播），可作为专用的天气预报、气象分析电视app，效果如图：
