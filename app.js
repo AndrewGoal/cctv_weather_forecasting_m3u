@@ -176,21 +176,25 @@
         });
     
         let json = await reswb.json();
-    
-        json.data.cards.forEach((card, index) => {
-            let duration = card.mblog.page_info.media_info.duration
-            let datewbISOString = toISODateFMTbyTimezoneOffset(new Date(card.mblog.created_at), -480);
-            // console.log(`# ${datewbISOString}`);
-            let url = card.mblog.page_info.urls.mp4_720p_mp4
-    
-            if (card.card_type !== 9) return;
-            if (index == 0) {
-                latests.push({ text: `#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(8, 16).replace('T', '日')}\n${url}`, pubDate: datewbISOString });
-            }
-            m3utext += `\n#EXTINF:${duration} group-title="农业气象",${datewbISOString.slice(5, 16).replace('-', '月').replace('T', '日')}\n${url}`
-    
-        });
-    
+
+        if (json && json.data && json.data.cards && json.data.cards.forEach) {
+            
+            json.data.cards.forEach((card, index) => {
+                let duration = card.mblog.page_info.media_info.duration
+                let datewbISOString = toISODateFMTbyTimezoneOffset(new Date(card.mblog.created_at), -480);
+                // console.log(`# ${datewbISOString}`);
+                let url = card.mblog.page_info.urls.mp4_720p_mp4
+        
+                if (card.card_type !== 9) return;
+                if (index == 0) {
+                    latests.push({ text: `#EXTINF:${duration} group-title="最新天气",农业气象${datewbISOString.slice(8, 16).replace('T', '日')}\n${url}`, pubDate: datewbISOString });
+                }
+                m3utext += `\n#EXTINF:${duration} group-title="农业气象",${datewbISOString.slice(5, 16).replace('-', '月').replace('T', '日')}\n${url}`
+        
+            });
+            
+        }
+        
     }
 
     // console.log(latests);
