@@ -167,14 +167,14 @@
               "sec-fetch-site": "same-origin",
               "x-requested-with": "XMLHttpRequest",
               "x-xsrf-token": "02e996",
-              "cookie": "_T_WM=26681150684; MLOGIN=0; WEIBOCN_FROM=1110106030; XSRF-TOKEN=02e996; mweibo_short_token=c86832c9b3; M_WEIBOCN_PARAMS=luicode%3D10000011%26lfid%3D1005051969156553%26oid%3D5103586063945698%26fid%3D1005051969156553%26uicode%3D10000011",
+              "cookie": "_T_WM=90337733096; WEIBOCN_FROM=1110006030; SCF=AqSR5SVE_lKKBffGrJQlnU5r-rnakzorDsuiYRz-R8DcK8NO4A787NL7HbLJaLeeDeFRFKNofUzMJ6vCvQDlb3s.; SUB=_2A25EIXLgDeRhGe5M7FoS9CzLwj2IHXVnX4oorDV6PUJbktAYLRHfkW1NdM5m_wX_GOgFWhPblxwNBAw_AOB6m0-z; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Wh.LjNYb9NyIfwowmn31O8u5NHD95QReoMRe0BES0.pWs4DqcjMi--NiK.Xi-2Ri--ciKnRi-zN1hzN1heXeoM4eBtt; SSOLoginState=1764033200; ALF=1766625200; MLOGIN=1; XSRF-TOKEN=919358; M_WEIBOCN_PARAMS=oid%3D5215599259026785%26luicode%3D10000011%26lfid%3D1076031969156553%26fid%3D1005051969156553%26uicode%3D10000011",
               "Referer": "https://m.weibo.cn/u/1969156553?luicode=10000011&lfid=1005051969156553",
               "Referrer-Policy": "strict-origin-when-cross-origin"
             },
             "body": null,
             "method": "GET"
         });
-    
+
         let json = await reswb.json();
 
         if (json && json.data && json.data.cards && json.data.cards.forEach) {
