@@ -188,7 +188,7 @@
                 let url = card.mblog.page_info.urls.mp4_720p_mp4
         
                 if (card.card_type !== 9) return;
-                if (card.mblog.title && card.mblog.title.text == '置顶') {
+                if (card.mblog && card.mblog.title && card.mblog.title.text == '置顶') {
                     sumOfPinTop++;
                     return;
                 }
