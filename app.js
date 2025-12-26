@@ -153,27 +153,28 @@
 
         let reswb = await fetch("https://m.weibo.cn/api/container/getIndex?luicode=10000011&lfid=1005051969156553&type=uid&value=1969156553&containerid=1076031969156553", {
             "headers": {
-              "accept": "application/json, text/plain, */*",
-              "accept-language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
-              "cache-control": "no-cache",
-              "mweibo-pwa": "1",
-              "pragma": "no-cache",
-              "priority": "u=1, i",
-              "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
-              "sec-ch-ua-mobile": "?0",
-              "sec-ch-ua-platform": "\"macOS\"",
-              "sec-fetch-dest": "empty",
-              "sec-fetch-mode": "cors",
-              "sec-fetch-site": "same-origin",
-              "x-requested-with": "XMLHttpRequest",
-              "x-xsrf-token": "02e996",
-              "cookie": "_T_WM=90337733096; WEIBOCN_FROM=1110006030; SCF=AqSR5SVE_lKKBffGrJQlnU5r-rnakzorDsuiYRz-R8DcK8NO4A787NL7HbLJaLeeDeFRFKNofUzMJ6vCvQDlb3s.; SUB=_2A25EIXLgDeRhGe5M7FoS9CzLwj2IHXVnX4oorDV6PUJbktAYLRHfkW1NdM5m_wX_GOgFWhPblxwNBAw_AOB6m0-z; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Wh.LjNYb9NyIfwowmn31O8u5NHD95QReoMRe0BES0.pWs4DqcjMi--NiK.Xi-2Ri--ciKnRi-zN1hzN1heXeoM4eBtt; SSOLoginState=1764033200; ALF=1766625200; MLOGIN=1; XSRF-TOKEN=919358; M_WEIBOCN_PARAMS=oid%3D5215599259026785%26luicode%3D10000011%26lfid%3D1076031969156553%26fid%3D1005051969156553%26uicode%3D10000011",
-              "Referer": "https://m.weibo.cn/u/1969156553?luicode=10000011&lfid=1005051969156553",
-              "Referrer-Policy": "strict-origin-when-cross-origin"
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                "accept-language": "zh-CN,zh;q=0.9",
+                "cache-control": "no-cache",
+                "pragma": "no-cache",
+                "priority": "u=0, i",
+                "sec-ch-ua": "\"Chromium\";v=\"142\", \"Google Chrome\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"macOS\"",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "same-origin",
+                "upgrade-insecure-requests": "1",
+                "cookie": "WEIBOCN_FROM=1110006030; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Wh.LjNYb9NyIfwowmn31O8u5JpX5KMhUgL.FonES0n0ShzN1K22dJLoIp7LxKML1KBLBKnLxKqL1hnLBoMReoMRe0BES0.p; SCF=AqSR5SVE_lKKBffGrJQlnU5r-rnakzorDsuiYRz-R8Dcsf-F5Bo8brVSicdoclWWM5_mRDcV5EQWT4OL8JddOFI.; SUB=_2A25ESLmBDeRhGe5M7FoS9CzLwj2IHXVnJ7NJrDV6PUJbktAYLUjAkW1NdM5m_1eM-_6LtII9iUobP-3ifyH7R13B; SSOLoginState=1766640081; ALF=1769232081; MLOGIN=1; _T_WM=65482965241; XSRF-TOKEN=b9df73; M_WEIBOCN_PARAMS=luicode%3D10000011%26lfid%3D1005051969156553%26fid%3D1076031969156553%26uicode%3D10000011; mweibo_short_token=a14ba88199"
             },
             "body": null,
             "method": "GET"
         });
+
+        if (!reswb.ok) {
+            // console.log(reswb);
+            return;
+        }
 
         let json = await reswb.json();
 
