@@ -14,7 +14,7 @@ cctv 中央电视台 山东卫视 山东新闻 天气预报 气象分析 m3u文�
 
 ## 数据源
 1. https://www.weather.com.cn/video/ylist.shtml
-2. ~~https://m.weibo.cn/u/1969156553~~（农业气象，需登录，放弃）
+2. [~~农业气象~~，需登录，放弃](https://m.weibo.cn/u/1969156553)
 3. https://sdxw.iqilu.com/share/dHYtMjEtNTYyNjU0OQ.html#/
 4. https://sdxw.iqilu.com/share/dHYtMjEtNTYyNTg5MQ.html#/
 
