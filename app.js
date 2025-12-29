@@ -148,7 +148,7 @@
 
     }
 
-    if (1) {
+    if (0) {
         // 农业气象 数据源2
 
         let reswb = await fetch("https://m.weibo.cn/api/container/getIndex?luicode=10000011&lfid=1005051969156553&type=uid&value=1969156553&containerid=1076031969156553", {
