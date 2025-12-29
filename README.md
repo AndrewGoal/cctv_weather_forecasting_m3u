@@ -38,6 +38,7 @@ node app.js > tq.m3u
 - 墙内：https://github.moeyy.xyz/https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/releases/latest/download/cctv_weather_forecasting.m3u
 
 ### 食用m3u文件：
+- **在线演示：[iptvplayer.stream](https://iptvplayer.stream/import/DsfiTxgjLr)**
 - Mac/iOS平台：[APTV](https://apps.apple.com/tw/app/aptv/id1630403500)
 - VLC播放器：⌘ + n 以上m3u网址
 - IINA播放器：⇧ + ⌘ + o 以上m3u网址
