@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>气象万千 · 天气预报表在线播放器</title>
+  <meta name="description" content="CCTV 天气预报、气象分析、山东天气预报与农业气象 m3u 在线播放器。自动加载最新播放列表，无广告，支持电视和手机浏览器。">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="气象万千 · 天气预报表在线播放器">
+  <meta property="og:description" content="自动加载最新 m3u 的天气预报在线播放器，无广告。">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9B%85%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="player/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#list">跳到节目单</a>
+
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="气象万千天气预报表首页">
+        <span class="brand-badge" aria-hidden="true">☁️</span>
+        <span class="brand-copy">
+          <span class="brand-title">气象万千 · 天气预报表</span>
+          <span class="brand-sub">CCTV / 山东 / 农业气象<span class="sep">·</span>自动加载最新 m3u<span class="sep">·</span>无广告</span>
+        </span>
+      </a>
+
+      <div class="top-actions">
+        <span class="status" id="status" data-kind="loading" role="status" aria-live="polite" title="播放列表加载状态">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text" id="statusText">正在加载最新播放列表…</span>
+        </span>
+        <button class="btn" id="refreshBtn" type="button" title="立即重新加载最新 m3u（快捷键 R）">
+          <svg class="icon icon-refresh" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></svg>
+          <span>刷新</span>
+        </button>
+        <a class="btn btn-icon" id="repoLink" href="https://github.com/AndrewGoal/cctv_weather_forecasting_m3u" target="_blank" rel="noopener" title="项目主页（GitHub）" aria-label="项目主页">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.17c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="stage" aria-label="视频播放器">
+        <div class="player-wrap">
+          <video id="video" class="video" controls playsinline preload="metadata" poster="player/poster.svg" referrerpolicy="no-referrer">
+            你的浏览器不支持 HTML5 视频播放。
+          </video>
+
+          <div class="overlay" id="overlay">
+            <button class="big-play" id="bigPlay" type="button" aria-label="播放">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <p class="overlay-title" id="overlayTitle">正在加载节目单…</p>
+            <p class="overlay-hint" id="overlayHint">播放器会自动读取最新的 m3u 文件</p>
+          </div>
+
+          <div class="player-badge" id="playerBadge" hidden></div>
+        </div>
+
+        <div class="now-card">
+          <div class="now-main">
+            <div class="now-tags">
+              <span class="tag tag-group" id="nowGroup">最新天气</span>
+              <span class="tag" id="nowTime" hidden></span>
+              <span class="tag" id="nowDuration" hidden></span>
+            </div>
+            <h2 class="now-title" id="nowTitle">正在加载节目单…</h2>
+            <p class="now-meta" id="nowMeta">节目单每 30 分钟自动更新</p>
+          </div>
+
+          <div class="now-actions">
+            <button class="btn" id="prevBtn" type="button" title="上一个节目（↑）" disabled>← 上一个</button>
+            <button class="btn btn-primary" id="nextBtn" type="button" title="下一个节目（↓）" disabled>下一个 →</button>
+            <div class="more">
+              <button class="btn btn-icon" id="moreBtn" type="button" title="更多操作" aria-label="更多操作" aria-haspopup="true" aria-expanded="false">⋯</button>
+              <div class="menu" id="moreMenu" role="menu" hidden>
+                <button type="button" id="copyBtn" role="menuitem">复制视频直链</button>
+                <button type="button" id="openBtn" role="menuitem">在新标签页打开</button>
+                <button type="button" id="shareBtn" role="menuitem">复制本页链接</button>
+                <a href="cctv_weather_forecasting.m3u" id="downloadLink" download role="menuitem">下载 m3u 文件</a>
+              </div>
+            </div>
+            <label class="switch" title="一个节目结束后自动播放下一个">
+              <input type="checkbox" id="autoNext" checked>
+              <span>自动连播</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="notice" id="notice" hidden>
+          <span class="notice-text" id="noticeText"></span>
+          <button class="notice-action" id="noticeAction" type="button" hidden></button>
+        </div>
+
+        <div class="stage-tips">
+          <span class="keys">快捷键：<kbd>空格</kbd> 播放 / 暂停 · <kbd>↑</kbd> <kbd>↓</kbd> 切换节目 · <kbd>/</kbd> 搜索</span>
+          <a class="source-link" id="sourceLink" href="https://github.com/AndrewGoal/cctv_weather_forecasting_m3u/releases/latest/download/cctv_weather_forecasting.m3u" target="_blank" rel="noopener">m3u 原始地址 ↗</a>
+        </div>
+      </section>
+
+      <aside class="sidebar" id="sidebar" aria-label="节目单">
+        <div class="sidebar-head">
+          <label class="search">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+            <input id="search" type="search" placeholder="搜索频道或节目…" autocomplete="off" spellcheck="false" aria-label="搜索频道或节目">
+            <kbd>/</kbd>
+          </label>
+        </div>
+
+        <div class="chips" id="chips" role="tablist" aria-label="按栏目筛选"></div>
+
+        <div class="list" id="list" tabindex="-1">
+          <div class="list-loading">
+            <span class="spinner" aria-hidden="true"></span>
+            正在加载最新播放列表…
+          </div>
+        </div>
+
+        <div class="sidebar-foot">
+          <span id="listMeta">—</span>
+          <button class="linkish" id="clearFilter" type="button" hidden>显示全部</button>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="foot">
+      <span>节目单由 GitHub Actions 每 30 分钟生成；播放器打开时及运行中自动读取最新版本，无广告、无统计。</span>
+      <span class="foot-right">
+        <a href="https://github.com/AndrewGoal/cctv_weather_forecasting_m3u" target="_blank" rel="noopener">GitHub 项目</a>
+        <span class="dot">·</span>
+        <a href="https://github.com/AndrewGoal/cctv_weather_forecasting_m3u#readme" target="_blank" rel="noopener">使用说明</a>
+      </span>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="player/playlist.js"></script>
+  <script src="player/app.js"></script>
+</body>
+</html>

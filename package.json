@@ -4,7 +4,8 @@
   "description": "cctv 中央电视台 天气预报 m3u文件生成",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "test:player": "node --test test/player.test.js"
   },
   "repository": {
     "type": "git",

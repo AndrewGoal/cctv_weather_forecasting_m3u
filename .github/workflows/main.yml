@@ -4,6 +4,23 @@ on:
   schedule:
       - cron: "*/30 * * * *" # runs every 30 minutes
   workflow_dispatch: # 添加手动触发选项
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "player/**"
+      - "app.js"
+      - ".github/workflows/main.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: weather-m3u-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   run-script:
@@ -49,7 +66,7 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               https://api.github.com/repos/${{ github.repository }}/releases/assets/$ASSET_ID
           fi
-                
+
       - name: Upload output file to GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -62,3 +79,29 @@ jobs:
             -H "Content-Type: application/octet-stream" \
             --data-binary @cctv_weather_forecasting.m3u \
             "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ env.RELEASE_ID }}/assets?name=cctv_weather_forecasting.m3u"
+
+      # 在线演示页与最新 m3u 一起部署，播放器同源读取，前端始终拿到最新文件
+      - name: Assemble Pages site
+        run: |
+          mkdir -p public/player
+          cp index.html public/index.html
+          cp player/* public/player/
+          cp cctv_weather_forecasting.m3u public/cctv_weather_forecasting.m3u
+          touch public/.nojekyll
+          ls -lh public public/player
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: run-script
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
