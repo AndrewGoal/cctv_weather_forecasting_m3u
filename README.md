@@ -43,9 +43,9 @@ node app.js > tq.m3u
 [![在线演示](https://img.shields.io/badge/▶%20在线演示-打开天气播放器-2ea6ff?style=for-the-badge)](https://andrewgoal.github.io/cctv_weather_forecasting_m3u/)
 
 <p align="center">
-  <a href="https://andrewgoal.github.io/cctv_weather_forecasting_m3u/"><img src="demo.jpg" height="420" alt="电脑端界面：节目单与播放器"></a>
+  <a href="https://andrewgoal.github.io/cctv_weather_forecasting_m3u/"><img src="demo.jpg" width="540" alt="电脑端界面：节目单与播放器"></a>
   &nbsp;&nbsp;
-  <a href="https://andrewgoal.github.io/cctv_weather_forecasting_m3u/"><img src="demo-mobile.jpg" height="420" alt="手机端界面：播放器、节目信息与节目单"></a>
+  <a href="https://andrewgoal.github.io/cctv_weather_forecasting_m3u/"><img src="demo-mobile.jpg" width="168" alt="手机端界面：播放器、节目信息与节目单"></a>
   <br>
   <sub>左：电脑端 · 右：手机端</sub>
 </p>
