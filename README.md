@@ -44,6 +44,8 @@ node app.js > tq.m3u
 
 [![在线演示器截图：左侧为节目单，右侧播放最新的天气预报](demo.jpg)](https://andrewgoal.github.io/cctv_weather_forecasting_m3u/)
 
+[![手机端界面截图：播放器、当前节目信息和节目单](demo-mobile.jpg)](https://andrewgoal.github.io/cctv_weather_forecasting_m3u/)
+
 - 打开页面即自动加载**最新** m3u，无需手动导入；GitHub Actions 每 30 分钟生成 m3u 并同步部署演示页
 - 打开页面即自动播放；浏览器限制「带声音自动播放」时，会先静音播放并提示，点击页面任意处即可开启声音
 - 无广告、无统计，深色界面，手机 / 平板 / 电视浏览器均可使用

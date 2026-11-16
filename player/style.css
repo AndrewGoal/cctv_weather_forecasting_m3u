@@ -752,6 +752,7 @@ a:hover {
 /* ---------- 侧栏 ---------- */
 
 .sidebar-head {
+  flex: none;
   padding: 14px 14px 10px;
 }
 
@@ -804,6 +805,8 @@ a:hover {
 
 .chips {
   display: flex;
+  /* 侧栏被压缩时优先压缩列表，栏目标签保持完整可点 */
+  flex: 0 0 auto;
   gap: 7px;
   flex-wrap: wrap;
   padding: 0 14px 12px;
@@ -1034,6 +1037,7 @@ a:hover {
 
 .sidebar-foot {
   display: flex;
+  flex: none;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -1249,6 +1253,7 @@ body.embed .now-card {
     overflow-x: auto;
     overflow-y: hidden;
     max-height: none;
+    min-height: 38px;
     padding-bottom: 10px;
     scrollbar-width: none;
   }

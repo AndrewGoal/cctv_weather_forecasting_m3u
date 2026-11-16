@@ -94,6 +94,12 @@
     return Math.min(max, Math.max(min, value));
   }
 
+  function isTypingTarget(target) {
+    if (!target) return false;
+    var tag = target.tagName || '';
+    return tag === 'INPUT' || tag === 'TEXTAREA' || !!target.isContentEditable;
+  }
+
   function readAutoNext() {
     try {
       return localStorage.getItem(AUTONEXT_KEY) !== '0';
@@ -1197,9 +1203,10 @@
     copyText(location.href);
   });
 
+  // 捕获阶段处理：视频获得焦点后，浏览器原生控件会先吃掉空格键，
+  // 只有先在 document 捕获阶段拦截，空格才始终是“播放 / 暂停”。
   document.addEventListener('keydown', function (event) {
-    var tag = (event.target && event.target.tagName) || '';
-    var typing = tag === 'INPUT' || tag === 'TEXTAREA' || (event.target && event.target.isContentEditable);
+    var typing = isTypingTarget(event.target);
     if (typing) {
       if (event.key === 'Escape' && event.target === searchInput) {
         searchInput.value = '';
@@ -1215,7 +1222,9 @@
       searchInput.focus();
       searchInput.select();
     } else if (event.key === ' ' || event.code === 'Space') {
+      // 阻止视频原生控件的空格处理，否则会和我们各切换一次，表现为“动一下就停”
       event.preventDefault();
+      event.stopPropagation();
       if (video.paused) video.play().catch(function () {});
       else video.pause();
     } else if (event.key === 'ArrowDown') {
@@ -1227,8 +1236,18 @@
     } else if (event.key === 'r' || event.key === 'R') {
       if (!event.metaKey && !event.ctrlKey && !event.altKey) loadPlaylist({ manual: true });
     }
-  });
+  }, true);
 
+  // 有的浏览器在 keyup / keypress 阶段才处理视频控件的空格，
+  // 一并拦掉，保证一次按键只切换一次。
+  ['keyup', 'keypress'].forEach(function (type) {
+    document.addEventListener(type, function (event) {
+      if ((event.key === ' ' || event.code === 'Space') && !isTypingTarget(event.target)) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+  });
   /* ---------- 自动刷新 ---------- */
 
   setInterval(function () {
