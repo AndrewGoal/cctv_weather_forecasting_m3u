@@ -45,13 +45,19 @@
     loading: false,
     firstLoad: true,
     triedOriginal: false,
-    mutedForAutoplay: false
+    mutedForAutoplay: false,
+    isHls: false,
+    live: false,
+    triedHlsProbe: false
   };
 
   /* ---------- DOM ---------- */
 
   var $ = function (id) { return document.getElementById(id); };
   var video = $('video');
+  var hls = null;
+  var slowNotice = false;
+  var nativeHls = !!(video.canPlayType('application/vnd.apple.mpegurl'));
   var overlay = $('overlay');
   var overlayTitle = $('overlayTitle');
   var overlayHint = $('overlayHint');
@@ -177,6 +183,81 @@
 
   function isPlayable(url) {
     return /^https?:\/\//i.test(url || '');
+  }
+
+  function isHlsUrl(url) {
+    return /\.m3u8?(\?|#|$)/i.test(url || '');
+  }
+
+  /**
+   * 实际用于播放的地址。解析器会把 http 源升级成 https（GitHub Pages 上必须这样），
+   * 但页面本身是 http（本地自建、内网部署）时没必要升级，否则反而播不了。
+   */
+  function playSrc(item) {
+    if (!item) return '';
+    if (location.protocol === 'http:' && /^http:\/\//i.test(item.url || '')) return item.url;
+    return item.playUrl || item.url || '';
+  }
+
+  function canUseHlsJs() {
+    return !!(window.Hls && window.Hls.isSupported());
+  }
+
+  /**
+   * 能跑 hls.js 就交给它（Chrome / Edge / Firefox / 桌面 Safari 行为一致）；
+   * 只有不支持 MSE 的环境（iOS Safari 等）才用 <video> 原生播放 HLS。
+   */
+  function useHlsFor(item) {
+    if (!item || !canUseHlsJs()) return false;
+    return isHlsUrl(playSrc(item));
+  }
+
+  /** HLS 地址在当前浏览器里完全没法播放（既没有 hls.js 也没有原生支持）。 */
+  function hlsUnplayable(item) {
+    return isHlsUrl(playSrc(item)) && !canUseHlsJs() && !nativeHls;
+  }
+
+  /** 没有扩展名、或扩展名不是普通视频的地址，都可能其实是 HLS。 */
+  function maybeHls(item) {
+    var url = playSrc(item);
+    if (!url) return false;
+    if (isHlsUrl(url)) return true;
+    return !/\.(mp4|m4v|webm|ogg|ogv|mp3|m4a|aac|flac|wav|ts|m4s|flv)(\?|#|$)/i.test(url);
+  }
+
+  function stopHls() {
+    if (hls) {
+      try { hls.destroy(); } catch (err) { /* ignore */ }
+      hls = null;
+    }
+    state.isHls = false;
+  }
+
+  /**
+   * 有些直播源地址没有 .m3u8 扩展名（只有响应头能看出来）。
+   * 原生播放失败时取前几百字节，确认是不是 #EXTM3U。
+   */
+  function probeHls(item) {
+    return fetch(playSrc(item), { cache: 'no-store' }).then(function (response) {
+      if (!response.ok) return false;
+      if (!response.body || !response.body.getReader) return response.text().then(isHlsText);
+      // 只读第一块就取消，避免把整个 mp4 都下载下来
+      var reader = response.body.getReader();
+      return reader.read().then(function (chunk) {
+        reader.cancel().catch(function () { /* ignore */ });
+        var text = '';
+        if (chunk && chunk.value) {
+          text = new TextDecoder('utf-8').decode(chunk.value.slice(0, 512));
+        }
+        return isHlsText(text);
+      });
+    }).catch(function () {
+      return false;
+    });
+  }
+
+  function isHlsText(text) {
+    return /^\s*#EXTM3U/i.test(text || '');
   }
 
   function sameItem(a, b) {
@@ -913,14 +994,38 @@
 
   function applyCurrent(item, options) {
     var opts = options || {};
+    // 切台时先清掉上一个频道的直播状态，再刷新信息区
+    if (opts.load) state.live = false;
     updateNowCard(item);
 
     if (opts.load) {
       state.triedOriginal = false;
-      video.src = item.playUrl;
+      state.triedHlsProbe = false;
+      stopHls();
+      playerBadge.hidden = true;
+
+      if (useHlsFor(item)) {
+        state.isHls = true;
+        showOverlay(item.title, '正在连接直播…');
+        loadHls(item, opts);
+        return;
+      }
+
+      if (hlsUnplayable(item)) {
+        showOverlay('无法播放直播', '当前浏览器不支持 HLS 直播流');
+        showNotice('当前浏览器不支持 HLS 直播流，换用 Chrome / Edge / Firefox 或 Safari 试试。', 'error', {
+          label: '下一个频道',
+          scope: 'playback',
+          onClick: function () { step(1); }
+        });
+        setStatus('该直播源需要 HLS 支持', 'warn');
+        return;
+      }
+
+      video.src = playSrc(item);
       video.load();
       showOverlay(item.title, '点击播放，或按空格键');
-      playerBadge.hidden = true;
+      armSlowNotice(item, maybeHls(item));
     } else if (video.paused) {
       showOverlay(item.title, '点击播放，或按空格键');
     }
@@ -929,6 +1034,128 @@
       video.preload = 'auto';
       attemptAutoplay(item);
     }
+  }
+
+  /** 加载迟迟没有画面时给一句提示（有的直播源其实是被跨域挡住了）。 */
+  function armSlowNotice(item, liveHint) {
+    setTimeout(function () {
+      if (!sameItem(state.current, item) || video.readyState >= 2 || state.live) return;
+      showOverlay(item.title, liveHint ? '加载较慢，源站可能限制了访问…' : '加载较慢…');
+      showNotice(liveHint
+        ? '这个频道加载不出来：源站可能不允许跨域，或链接已失效。'
+        : '加载较慢，可以稍等一会儿或换下一个节目。', 'warn', {
+        label: '下一个频道',
+        scope: 'playback',
+        onClick: function () { step(1); }
+      });
+      slowNotice = true;
+    }, 25000);
+  }
+
+  /** 用 hls.js 拉取直播流；这些 IPTV 源分片较大，超时时间放得比较宽。 */
+  function loadHls(item, opts) {
+    var instance = new Hls({
+      enableWorker: true,
+      lowLatencyMode: false,
+      manifestLoadingTimeOut: 30000,
+      manifestLoadingMaxRetry: 3,
+      levelLoadingTimeOut: 30000,
+      levelLoadingMaxRetry: 3,
+      fragLoadingTimeOut: 45000,
+      fragLoadingMaxRetry: 3
+    });
+    hls = instance;
+    var recovered = false;
+    var failed = false;
+
+    // 有的源站响应很慢，长时间没画面时给一句提示，避免看起来像卡死
+    var slowTimer = setTimeout(function () {
+      if (failed || hls !== instance || video.readyState >= 2) return;
+      showOverlay(item.title, '源站响应较慢，仍在连接…');
+    }, 20000);
+
+    instance.on(Hls.Events.MANIFEST_PARSED, function () {
+      if (opts.autoplay) {
+        video.preload = 'auto';
+        attemptAutoplay(item);
+      } else if (video.paused) {
+        showOverlay(item.title, '点击播放，或按空格键');
+      }
+    });
+
+    instance.on(Hls.Events.LEVEL_LOADED, function (event, data) {
+      if (data && data.details && data.details.live) markLive();
+    });
+
+    instance.on(Hls.Events.ERROR, function (event, data) {
+      if (!data || !data.fatal) return;
+
+      var details = data.details || '';
+      // 播放列表本身拿不到（地址失效、跨域、编码不支持）：重试也没用，直接提示
+      if (details.indexOf('manifest') === 0) {
+        failed = true;
+        clearTimeout(slowTimer);
+        hlsFailed(item, data);
+        return;
+      }
+
+      // 先尝试一次自动恢复，仍失败再提示用户
+      if (!recovered && data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+        recovered = true;
+        instance.recoverMediaError();
+        return;
+      }
+      if (!recovered && data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+        recovered = true;
+        instance.startLoad();
+        return;
+      }
+      failed = true;
+      clearTimeout(slowTimer);
+      hlsFailed(item, data);
+    });
+
+    instance.attachMedia(video);
+    instance.loadSource(playSrc(item));
+  }
+
+  /** 原生播放失败后改走 hls.js（通常是老版本 Chrome / Firefox 没有原生 HLS）。 */
+  function loadHlsFromError(item) {
+    state.isHls = true;
+    state.live = false;
+    showOverlay(item.title, '正在连接直播…');
+    loadHls(item, { autoplay: true });
+  }
+
+  function markLive() {
+    if (state.live) return;
+    state.live = true;
+    nowTime.hidden = true;
+    nowDuration.hidden = false;
+    nowDuration.textContent = '直播';
+    nowDuration.title = 'HLS 直播流';
+    updateMeta();
+  }
+
+  function hlsFailed(item, data) {
+    var reason = '直播加载失败，可能是源站链接已失效';
+    var details = (data && data.details) || '';
+    if (/IncompatibleCodecs/i.test(details)) {
+      reason = '浏览器不支持这个直播流的编码（可能是 H.265 / AC-3）';
+    } else if (data && data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+      reason = '直播间无法访问：源站不允许跨域，或链接已失效';
+    } else if (data && data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+      reason = '浏览器不支持这个直播流的编码（可能是 H.265 / AC-3）';
+    }
+    showOverlay('无法播放直播', '可以试试同栏目的其他频道');
+    showNotice(reason + '。', 'error', {
+      label: '下一个频道',
+      scope: 'playback',
+      onClick: function () { step(1); }
+    });
+    setStatus('直播播放失败 · 可尝试下一个', 'warn');
+    hideSoundPrompt();
+    notifyParent('cwp:error', { message: reason, title: item.title });
   }
 
   function updateNowCard(item) {
@@ -951,6 +1178,7 @@
     } else {
       nowDuration.hidden = true;
       nowDuration.textContent = '';
+      nowDuration.title = '';
     }
 
     updateMeta();
@@ -966,7 +1194,8 @@
     var parts = [];
     parts.push('来源：' + (state.source ? state.source.label : '最新 m3u'));
     parts.push('更新于 ' + formatClock(state.fileTime || Date.now()));
-    if (index >= 0) parts.push('第 ' + (index + 1) + '/' + groupItems.length + ' 个');
+    if (state.live) parts.push('直播中');
+    else if (index >= 0) parts.push('第 ' + (index + 1) + '/' + groupItems.length + ' 个');
     nowMeta.textContent = parts.join(' · ');
   }
 
@@ -1022,7 +1251,6 @@
   /* ---------- 视频事件 ---------- */
 
   video.addEventListener('play', function () {
-    hideOverlay();
     if (state.items.length) updateStatus();
     if (state.mutedForAutoplay && video.muted) showSoundPrompt();
     else hideSoundPrompt();
@@ -1042,6 +1270,15 @@
     hideSoundPrompt();
   });
 
+  // 真正出画面后再收起遮罩：直播起播慢的时候不会留下一块没有提示的黑屏
+  video.addEventListener('playing', function () {
+    hideOverlay();
+    if (slowNotice) {
+      hideNotice('playback');
+      slowNotice = false;
+    }
+  });
+
   video.addEventListener('volumechange', function () {
     if (!video.muted && state.mutedForAutoplay) {
       state.mutedForAutoplay = false;
@@ -1057,18 +1294,62 @@
 
   video.addEventListener('loadedmetadata', function () {
     if (!state.current) return;
+    if (state.live) return; // 直播没有固定时长，别把「直播」标签覆盖成时长
     if (!state.current.duration && isFinite(video.duration) && video.duration > 0) {
       nowDuration.hidden = false;
       nowDuration.textContent = '时长 ' + formatDuration(video.duration);
     }
   });
 
+  function failPlayback(item, errorCode, liveHint) {
+    var reason = '视频加载失败';
+    var code = errorCode || (video.error ? video.error.code : 0);
+    if (code === 2) reason = '网络错误，视频源无法访问';
+    else if (code === 3) reason = '视频解码失败';
+    else if (code === 4) reason = '视频格式或地址不可用（可能已过期）';
+    if (liveHint) reason = '直播间无法访问（源站不允许跨域，或链接已失效）';
+
+    showOverlay('无法播放：' + reason, '可能是源站链接已过期，试试同栏目的下一个节目');
+    showNotice(reason + (liveHint ? '。' : '。微博等源站的链接会过期，请刷新获取最新节目单或播放下一條。'), 'error', {
+      label: '播放下一条',
+      scope: 'playback',
+      onClick: function () { step(1); }
+    });
+    setStatus('视频播放失败 · 可尝试下一条', 'warn');
+    hideSoundPrompt();
+    notifyParent('cwp:error', { message: reason, title: item ? item.title : '' });
+  }
+
   video.addEventListener('error', function () {
     if (!state.current) return;
-    if (!state.triedOriginal && state.current.playUrl !== state.current.url && isPlayable(state.current.url)) {
+    // HLS 的错误由 hls.js 的事件处理，video.error 在这里没有有效信息
+    if (state.isHls) return;
+
+    var item = state.current;
+    var errorCode = video.error ? video.error.code : 0;
+
+    // 没有原生 HLS 或原生播放失败：可能是 HLS，试着交给 hls.js
+    if (!state.triedHlsProbe && canUseHlsJs() && maybeHls(item)) {
+      state.triedHlsProbe = true;
+      if (isHlsUrl(item.playUrl)) {
+        loadHlsFromError(item);
+        return;
+      }
+      probeHls(item).then(function (ok) {
+        if (!sameItem(state.current, item)) return;
+        if (!ok) {
+          failPlayback(item, errorCode, true);
+          return;
+        }
+        loadHlsFromError(item);
+      });
+      return;
+    }
+
+    if (!state.triedOriginal && playSrc(item) !== item.url && isPlayable(item.url)) {
       // https 版本不可用时，退回原始地址再试一次
       state.triedOriginal = true;
-      video.src = state.current.url;
+      video.src = item.url;
       video.load();
       if (!video.paused) video.play().catch(function () {});
       showNotice('https 地址播放失败，已尝试原始地址。', 'warn', {
@@ -1079,21 +1360,7 @@
       return;
     }
 
-    var reason = '视频加载失败';
-    if (video.error) {
-      if (video.error.code === 2) reason = '网络错误，视频源无法访问';
-      else if (video.error.code === 3) reason = '视频解码失败';
-      else if (video.error.code === 4) reason = '视频格式或地址不可用（可能已过期）';
-    }
-    showOverlay('无法播放：' + reason, '可能是源站链接已过期，试试同栏目的下一个节目');
-    showNotice(reason + '。微博等源站的链接会过期，请刷新获取最新节目单或播放下一條。', 'error', {
-      label: '播放下一条',
-      scope: 'playback',
-      onClick: function () { step(1); }
-    });
-    setStatus('视频播放失败 · 可尝试下一条', 'warn');
-    hideSoundPrompt();
-    notifyParent('cwp:error', { message: reason, title: state.current.title });
+    failPlayback(item, errorCode);
   });
 
   /* ---------- 交互 ---------- */
@@ -1115,7 +1382,8 @@
     }
     var promise = video.play();
     if (promise && promise.catch) {
-      promise.catch(function () {
+      promise.catch(function (error) {
+        if (error && error.name === 'AbortError') return;
         showNotice('浏览器未能开始播放，请再点一次或选择其他节目。', 'warn', {
           label: '下一条',
           scope: 'playback',
@@ -1292,6 +1560,8 @@
   }
 
   /* ---------- 启动 ---------- */
+
+  window.addEventListener('pagehide', stopHls);
 
   updatePager();
   loadPlaylist({});
