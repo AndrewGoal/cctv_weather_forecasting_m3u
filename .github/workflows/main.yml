@@ -85,7 +85,7 @@ jobs:
         run: |
           mkdir -p public/player
           cp index.html public/index.html
-          cp player/* public/player/
+          cp -r player/. public/player/
           cp cctv_weather_forecasting.m3u public/cctv_weather_forecasting.m3u
           touch public/.nojekyll
           ls -lh public public/player
