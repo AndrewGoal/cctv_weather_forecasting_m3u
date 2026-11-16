@@ -56,7 +56,10 @@ node app.js > tq.m3u
 - 「最新天气」自动置顶，支持栏目筛选、搜索、自动连播、断网时使用上次缓存
 - 播放中每 30 分钟自动检查更新，刷新节目单不会打断当前播放
 
-> GitHub 的 README 页面出于安全限制不能嵌入 iframe，所以上面是跳转链接。如果你有自己的网页，可以直接嵌入播放器：
+> GitHub 的 README 页面出于安全限制不能嵌入 iframe，所以上面是跳转链接。
+
+<details>
+<summary>嵌入到自己的网页（iframe 代码、可选参数、通信方式）</summary>
 
 ```html
 <iframe
@@ -84,6 +87,8 @@ node app.js > tq.m3u
 嵌入页面与父页面之间也可以通信：播放器会发送 `cwp:ready`、`cwp:change`、`cwp:playing` 消息；父页面可发送 `{ type: "cwp:refresh" }` 刷新节目单，或 `{ type: "cwp:play", url: "视频地址" }` 直接播放某个节目。
 
 演示页源码在 [`index.html`](index.html) 和 [`player/`](player/) 目录，由 [GitHub Actions](.github/workflows/main.yml) 在每次生成 m3u 后自动部署到 GitHub Pages。如果 `github.io` 访问不畅，也可以把这几个静态文件放到自己的服务器或对象存储，通过 `?m3u=` 指向加速后的 m3u 地址。
+
+</details>
 
 ### 食用m3u文件：
 
