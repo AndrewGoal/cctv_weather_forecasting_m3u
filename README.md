@@ -42,7 +42,13 @@ node app.js > tq.m3u
 
 [![在线演示](https://img.shields.io/badge/▶%20在线演示-打开天气播放器-2ea6ff?style=for-the-badge)](https://andrewgoal.github.io/cctv_weather_forecasting_m3u/)
 
-[![在线演示器截图：左侧为电脑端界面，右侧为手机端界面](demo.jpg)](https://andrewgoal.github.io/cctv_weather_forecasting_m3u/)
+<p align="center">
+  <a href="https://andrewgoal.github.io/cctv_weather_forecasting_m3u/"><img src="demo.jpg" height="420" alt="电脑端界面：节目单与播放器"></a>
+  &nbsp;&nbsp;
+  <a href="https://andrewgoal.github.io/cctv_weather_forecasting_m3u/"><img src="demo-mobile.jpg" height="420" alt="手机端界面：播放器、节目信息与节目单"></a>
+  <br>
+  <sub>左：电脑端 · 右：手机端</sub>
+</p>
 
 - 打开页面即自动加载**最新** m3u，无需手动导入；GitHub Actions 每 30 分钟生成 m3u 并同步部署演示页
 - 打开页面即自动播放；浏览器限制「带声音自动播放」时，会先静音播放并提示，点击页面任意处即可开启声音
