@@ -24,6 +24,10 @@
   var refreshMinutes = clamp(parseInt(params.get('refresh'), 10) || DEFAULT_REFRESH_MIN, 1, 720);
   var refreshMs = refreshMinutes * 60 * 1000;
   var customSource = params.get('m3u');
+  var autoplayParam = params.get('autoplay');
+  // 默认打开即自动播放；?autoplay=0 关闭，?autoplay=muted 直接静音自动播放
+  var autoplayEnabled = autoplayParam !== '0' && autoplayParam !== 'false';
+  var forceMutedAutoplay = autoplayParam === 'muted';
 
   var state = {
     items: [],
@@ -40,7 +44,8 @@
     hash: '',
     loading: false,
     firstLoad: true,
-    triedOriginal: false
+    triedOriginal: false,
+    mutedForAutoplay: false
   };
 
   /* ---------- DOM ---------- */
@@ -51,6 +56,7 @@
   var overlayTitle = $('overlayTitle');
   var overlayHint = $('overlayHint');
   var bigPlay = $('bigPlay');
+  var soundPrompt = $('soundPrompt');
   var playerBadge = $('playerBadge');
   var statusEl = $('status');
   var statusText = $('statusText');
@@ -252,6 +258,64 @@
   function hideOverlay() {
     overlay.classList.add('is-hidden');
     video.controls = true;
+  }
+
+  function showSoundPrompt() {
+    soundPrompt.hidden = false;
+  }
+
+  function hideSoundPrompt() {
+    soundPrompt.hidden = true;
+  }
+
+  /**
+   * 浏览器允许「静音自动播放」，但不允许「带声音自动播放」。
+   * 先尝试有声播放；被拦截时退回静音播放，用户第一次点击/按键后立即开启声音。
+   */
+  function playMuted(item) {
+    state.mutedForAutoplay = true;
+    video.muted = true;
+    var promise = video.play();
+    if (promise && promise.catch) {
+      promise.catch(function (error) {
+        if (error && error.name === 'AbortError') return;
+        state.mutedForAutoplay = false;
+        hideSoundPrompt();
+        if (item) showOverlay(item.title, '点击播放，或按空格键');
+      });
+    }
+    showSoundPrompt();
+  }
+
+  function attemptAutoplay(item) {
+    if (forceMutedAutoplay) {
+      playMuted(item);
+      return;
+    }
+
+    var promise = video.play();
+    if (!promise || !promise.catch) return;
+    promise.catch(function (error) {
+      if (error && error.name === 'AbortError') return;
+
+      if (error && error.name === 'NotAllowedError') {
+        playMuted(item);
+        return;
+      }
+
+      if (item) showOverlay(item.title, '点击播放，或按空格键');
+    });
+  }
+
+  function unmuteForGesture() {
+    if (!state.mutedForAutoplay) return;
+    state.mutedForAutoplay = false;
+    video.muted = false;
+    hideSoundPrompt();
+    if (video.paused && state.current) {
+      var promise = video.play();
+      if (promise && promise.catch) promise.catch(function () {});
+    }
   }
 
   function copyText(text) {
@@ -460,7 +524,10 @@
     renderList({ scroll: firstLoad });
 
     if (state.current) {
-      applyCurrent(state.current, { load: !video.getAttribute('src') || !sameItem(previousCurrent, state.current) });
+      applyCurrent(state.current, {
+        load: !video.getAttribute('src') || !sameItem(previousCurrent, state.current),
+        autoplay: firstLoad && autoplayEnabled
+      });
     }
 
     updateMeta();
@@ -853,12 +920,8 @@
     }
 
     if (opts.autoplay) {
-      var promise = video.play();
-      if (promise && promise.catch) {
-        promise.catch(function () {
-          showOverlay(item.title, '浏览器阻止了自动播放，点击开始播放');
-        });
-      }
+      video.preload = 'auto';
+      attemptAutoplay(item);
     }
   }
 
@@ -955,6 +1018,8 @@
   video.addEventListener('play', function () {
     hideOverlay();
     if (state.items.length) updateStatus();
+    if (state.mutedForAutoplay && video.muted) showSoundPrompt();
+    else hideSoundPrompt();
     if (state.current) {
       playerBadge.hidden = !/最新/.test(state.current.group);
       playerBadge.textContent = state.current.group;
@@ -968,10 +1033,19 @@
 
   video.addEventListener('pause', function () {
     playerBadge.hidden = true;
+    hideSoundPrompt();
+  });
+
+  video.addEventListener('volumechange', function () {
+    if (!video.muted && state.mutedForAutoplay) {
+      state.mutedForAutoplay = false;
+      hideSoundPrompt();
+    }
   });
 
   video.addEventListener('ended', function () {
     playerBadge.hidden = true;
+    hideSoundPrompt();
     playNextAfterEnded();
   });
 
@@ -1012,10 +1086,20 @@
       onClick: function () { step(1); }
     });
     setStatus('视频播放失败 · 可尝试下一条', 'warn');
+    hideSoundPrompt();
     notifyParent('cwp:error', { message: reason, title: state.current.title });
   });
 
   /* ---------- 交互 ---------- */
+
+  soundPrompt.addEventListener('click', function (event) {
+    event.stopPropagation();
+    unmuteForGesture();
+  });
+
+  // 用户第一次点击/按键后，把自动播放时的静音解除
+  document.addEventListener('click', unmuteForGesture, true);
+  document.addEventListener('keydown', unmuteForGesture, true);
 
   bigPlay.addEventListener('click', function (event) {
     event.stopPropagation();
