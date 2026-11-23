@@ -10,7 +10,7 @@
   <meta property="og:description" content="浏览器实时生成的天气预报 m3u 在线播放器，无广告。">
   <meta name="referrer" content="no-referrer">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9B%85%EF%B8%8F%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.2/player/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.3/player/style.css">
 </head>
 <body>
   <a class="skip-link" href="#list">跳到节目单</a>
@@ -43,7 +43,7 @@
     <main class="layout">
       <section class="stage" aria-label="视频播放器">
         <div class="player-wrap">
-          <video id="video" class="video" controls playsinline preload="metadata" poster="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.2/player/poster.svg" referrerpolicy="no-referrer">
+          <video id="video" class="video" controls playsinline preload="metadata" poster="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.3/player/poster.svg" referrerpolicy="no-referrer">
             你的浏览器不支持 HTML5 视频播放。
           </video>
 
@@ -100,7 +100,6 @@
 
         <div class="stage-tips">
           <span class="keys">快捷键：<kbd>空格</kbd> 播放 / 暂停 · <kbd>↑</kbd> <kbd>↓</kbd> 切换节目 · <kbd>/</kbd> 搜索</span>
-          <a class="source-link" id="sourceLink" href="#" target="_blank" rel="noopener" hidden>m3u 地址 ↗</a>
         </div>
       </section>
 
@@ -158,10 +157,10 @@
     };
   </script>
 
-  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.2/player/sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.3/player/sdk.js"></script>
   <script src="./weather-provider.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.2/player/playlist.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.2/player/vendor/hls.light.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.2/player/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.3/player/playlist.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.3/player/vendor/hls.light.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AndrewGoal/m3u-player@v1.3/player/app.js"></script>
 </body>
 </html>
