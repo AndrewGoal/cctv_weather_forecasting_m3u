@@ -9,7 +9,7 @@ on:
       - main
     paths:
       - "index.html"
-      - "player/**"
+      - "weather-provider.js"
       - "app.js"
       - ".github/workflows/main.yml"
 
@@ -83,12 +83,12 @@ jobs:
       # 在线演示页与最新 m3u 一起部署，播放器同源读取，前端始终拿到最新文件
       - name: Assemble Pages site
         run: |
-          mkdir -p public/player
+          mkdir -p public
           cp index.html public/index.html
-          cp -r player/. public/player/
+          cp weather-provider.js public/weather-provider.js
           cp cctv_weather_forecasting.m3u public/cctv_weather_forecasting.m3u
           touch public/.nojekyll
-          ls -lh public public/player
+          ls -lh public
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
