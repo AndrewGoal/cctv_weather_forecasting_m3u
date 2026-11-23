@@ -1,7 +1,7 @@
 /**
  * 气象万千 · 浏览器端实时生成 Provider
  *
- * 依赖通用播放器提供的 window.M3UPlayer.registerProvider()。
+ * 依赖海纳百川-播放器提供的 window.M3UPlayer.registerProvider()。
  * 数据源与根目录 app.js 相同，但按浏览器能力做了两处调整：
  *   1. 天气网改为 JSONP（该接口无 CORS 头，但返回固定回调 getLbDatas(...)）
  *   2. 齐鲁网改为裸 GET（原脚本里的 Cookie/Referer/自定义 header 在浏览器里不可用）
